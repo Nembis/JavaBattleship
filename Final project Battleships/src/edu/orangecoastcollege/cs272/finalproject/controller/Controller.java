@@ -8,8 +8,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import edu.orangecoastcollege.cs272.ic14.model.DBModel;
-import edu.orangecoastcollege.cs272.ic14.model.User;
-import edu.orangecoastcollege.cs272.ic14.model.VideoGame;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
