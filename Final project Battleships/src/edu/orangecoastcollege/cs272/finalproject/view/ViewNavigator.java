@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class ViewNavigator {
 	public static final String DIFFICULTY_SCENE = "DifficultyScene.fxml";
 	public static final String CONFIRMATION_SCENE = "ConfirmationScene.fxml";
-	
+	public static final String DIFFICULTY_REVIEW_SCENE = "DifficultyReviewScene.fxml";
 	
 	public static Stage mainStage;
 

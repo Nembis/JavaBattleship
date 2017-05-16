@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane prefHeight="177.0" prefWidth="276.0">
         <columnConstraints>
@@ -26,8 +25,8 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="8.0" prefWidth="65.0" text="Button" />
-                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" text="Button" />
+                  <Button mnemonicParsing="false" prefHeight="8.0" prefWidth="65.0" text="Continue" />
+                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" text="Return" />
                </children>
                <opaqueInsets>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
