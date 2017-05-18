@@ -19,7 +19,7 @@
         </rowConstraints>
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="184.0" text="Welcome to Battleships." />
-            <Button mnemonicParsing="false" text="Continue" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onMouseClicked="#loadDifficultyScene" text="Continue" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>
