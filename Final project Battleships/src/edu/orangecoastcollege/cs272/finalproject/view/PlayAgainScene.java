@@ -13,6 +13,8 @@ public class PlayAgainScene {
 	@FXML
 	public Object playAgainClick()
 	{
+		ViewNavigator.loadScene("Difficulty Scene", ViewNavigator.DIFFICULTY_SCENE);
+		
 		return null;
 	}
 	
