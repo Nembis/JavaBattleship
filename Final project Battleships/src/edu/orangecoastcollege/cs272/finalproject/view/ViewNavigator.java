@@ -1,7 +1,6 @@
 package edu.orangecoastcollege.cs272.finalproject.view;
 
 import java.io.IOException;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -18,7 +17,7 @@ public class ViewNavigator {
 	public static void setStage(Stage stage) {
 		mainStage = stage;
 	}
-
+	
 	public static void loadScene(String title, String sceneFXML) {
 
 		try {

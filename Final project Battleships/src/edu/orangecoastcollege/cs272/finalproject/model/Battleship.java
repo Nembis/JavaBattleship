@@ -6,21 +6,19 @@ public abstract class Battleship {
 	protected String mAphaCol;
 	protected int mNumRol;
 	protected boolean mIsPlayer;
+	protected int mDifficulty;
 
-	Battleship(int id, String aphaCol, int numRol, boolean isPlayer) {
+	Battleship(int id, String aphaCol, int numRol, boolean player, int difficulty) {
 		super();
 		mId = id;
 		mAphaCol = aphaCol;
 		mNumRol = numRol;
-		mIsPlayer = isPlayer;
+		mIsPlayer = player;
+		mDifficulty = difficulty;
 	}
 
 	public int getId() {
 		return mId;
-	}
-
-	public void setId(int id) {
-		mId = id;
 	}
 
 	public String getAphaCol() {
@@ -39,12 +37,20 @@ public abstract class Battleship {
 		mNumRol = numRol;
 	}
 
-	public boolean isIsPlayer() {
+	public boolean isPlayer() {
 		return mIsPlayer;
 	}
 
 	public void setIsPlayer(boolean isPlayer) {
 		mIsPlayer = isPlayer;
+	}
+
+	public int getDifficulty() {
+		return mDifficulty;
+	}
+
+	public void setDifficulty(int difficulty) {
+		mDifficulty = difficulty;
 	}
 
 	@Override

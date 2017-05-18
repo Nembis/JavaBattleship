@@ -4,12 +4,12 @@ public class Missile extends Battleship {
 
 	private boolean mIsLucky;
 
-	public Missile(int id, String aphaCol, int numRol, boolean isPlayer, boolean isLucky) {
-		super(id, aphaCol, numRol, isPlayer);
+	public Missile(int id, String aphaCol, int numRol, boolean isPlayer, int difficulty, boolean isLucky) {
+		super(id, aphaCol, numRol, isPlayer, difficulty);
 		mIsLucky = isLucky;
 	}
 
-	public boolean isIsLucky() {
+	public boolean isLucky() {
 		return mIsLucky;
 	}
 

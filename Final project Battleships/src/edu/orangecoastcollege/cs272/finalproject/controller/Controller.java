@@ -1,13 +1,10 @@
 package edu.orangecoastcollege.cs272.finalproject.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Scanner;
-
-import edu.orangecoastcollege.cs272.ic14.model.DBModel;
+import java.util.ArrayList;
+import edu.orangecoastcollege.cs272.finalproject.model.DBModel;
+import edu.orangecoastcollege.cs272.finalproject.model.Missile;
+import edu.orangecoastcollege.cs272.finalproject.model.Ship;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -15,28 +12,31 @@ public class Controller {
 
 	private static Controller theOne;
 
-	private static final String DB_NAME = "vg_inventory.db";
+	private static final String DB_NAME = "game_data.db";
 
-	private static final String USER_TABLE_NAME = "user";
-	private static final String[] USER_FIELD_NAMES = { "id", "name", "email", "role", "password"};
-	private static final String[] USER_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "TEXT", "TEXT", "TEXT"};
+	private static final String MISSILE_E_TABLE_NAME = "easy_missiles";
+	private static final String MISSILE_N_TABLE_NAME = "norm_missiles";
+	private static final String MISSILE_H_TABLE_NAME = "hard_missiles";
+	private static final String[] MISSILE_FIELD_NAMES = {"id", "col", "row", "player_owned","lucky"};
+	private static final String[] MISSILE_FIELD_TYPES = {"INTEGER PRIMARY KEY","TEXT","INTEGER","INTEGER","INTEGER"};
+	
+	private static final String SHIP_E_TABLE_NAME = "easy_ships";
+	private static final String SHIP_N_TABLE_NAME = "norm_ships";
+	private static final String SHIP_H_TABLE_NAME = "hard_ships";
+	private static final String[] SHIP_FIELD_NAMES = {"id", "col", "row", "player_owned","down"};
+	private static final String[] SHIP_FIELD_TYPES = {"INTEGER PRIMARY KEY","TEXT","INTEGER","INTEGER","INTEGER"};
 
-	private static final String VIDEO_GAME_TABLE_NAME = "video_game";
-	private static final String[] VIDEO_GAME_FIELD_NAMES = { "id", "name", "platform", "year", "genre", "publisher"};
-	private static final String[] VIDEO_GAME_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "TEXT", "INTEGER", "TEXT", "TEXT"};
-	private static final String VIDEO_GAME_DATA_FILE = "videogames_lite.csv";
+	private int mDifficulty;
+	private DBModel mEasyShipsDB;
+	private DBModel mEasyMissilesDB;
+	private DBModel mNormShipsDB;
+	private DBModel mNormMissilesDB;
+	private DBModel mHardShipsDB;
+	private DBModel mHardMissilesDB;
+	//private DBModel mHighScoreDB;
 
-	private static final String USER_GAMES_TABLE_NAME = "user_games";
-	private static final String[] USER_GAMES_FIELD_NAMES = { "user_id", "game_id"};
-	private static final String[] USER_GAMES_FIELD_TYPES = { "INTEGER", "INTEGER"};
-
-	private User mCurrentUser;
-	private DBModel mUserDB;
-	private DBModel mVideoGameDB;
-	private DBModel mUserGamesDB;
-
-	private ObservableList<User> mAllUsersList;
-	private ObservableList<VideoGame> mAllGamesList;
+	private ObservableList<Missile> mAllMissileList;
+	private ObservableList<Ship> mAllShipList;
 
 	private Controller() {
 	}
@@ -44,36 +44,75 @@ public class Controller {
 	public static Controller getInstance() {
 		if (theOne == null) {
 			theOne = new Controller();
-			theOne.mAllUsersList = FXCollections.observableArrayList();
-			theOne.mAllGamesList = FXCollections.observableArrayList();
+			theOne.mAllMissileList = FXCollections.observableArrayList();
+			theOne.mAllShipList = FXCollections.observableArrayList();
 
 			try {
-				theOne.mUserDB = new DBModel(DB_NAME, USER_TABLE_NAME, USER_FIELD_NAMES, USER_FIELD_TYPES);
-
-				ResultSet rs = theOne.mUserDB.getAllRecords();
-				while (rs.next()) {
-					int id = rs.getInt(USER_FIELD_NAMES[0]);
-					String name = rs.getString(USER_FIELD_NAMES[1]);
-					String email = rs.getString(USER_FIELD_NAMES[2]);
-					String role = rs.getString(USER_FIELD_NAMES[3]);
-					theOne.mAllUsersList.add(new User(id, name, email, role));
+				theOne.mEasyMissilesDB = new DBModel(DB_NAME, MISSILE_E_TABLE_NAME, MISSILE_FIELD_NAMES, MISSILE_FIELD_TYPES);
+				ArrayList<ArrayList<String>> records = theOne.mEasyMissilesDB.getAllRecords();
+				for(ArrayList<String> rs: records) {
+					int id = Integer.parseInt(rs.get(0));
+					int row = Integer.parseInt(rs.get(1));
+					String col = rs.get(2);
+					boolean player = rs.get(3).equals("1");
+					boolean lucky = rs.get(4).equals("1");
+					theOne.mAllMissileList.add(new Missile(id, col, row, player, 1, lucky));
+				}
+				
+				theOne.mNormMissilesDB = new DBModel(DB_NAME, MISSILE_N_TABLE_NAME, MISSILE_FIELD_NAMES, MISSILE_FIELD_TYPES);
+				records = theOne.mNormMissilesDB.getAllRecords();
+				for(ArrayList<String> rs: records) {
+					int id = Integer.parseInt(rs.get(0));
+					int row = Integer.parseInt(rs.get(1));
+					String col = rs.get(2);
+					boolean player = rs.get(3).equals("1");
+					boolean lucky = rs.get(4).equals("1");
+					theOne.mAllMissileList.add(new Missile(id, col, row, player, 2, lucky));
+				}
+				
+				theOne.mHardMissilesDB = new DBModel(DB_NAME, MISSILE_H_TABLE_NAME, MISSILE_FIELD_NAMES, MISSILE_FIELD_TYPES);
+				records = theOne.mHardMissilesDB.getAllRecords();
+				for(ArrayList<String> rs: records) {
+					int id = Integer.parseInt(rs.get(0));
+					int row = Integer.parseInt(rs.get(1));
+					String col = rs.get(2);
+					boolean player = rs.get(3).equals("1");
+					boolean lucky = rs.get(4).equals("1");
+					theOne.mAllMissileList.add(new Missile(id, col, row, player, 3, lucky));
 				}
 
-				theOne.mVideoGameDB = new DBModel(DB_NAME, VIDEO_GAME_TABLE_NAME, VIDEO_GAME_FIELD_NAMES, VIDEO_GAME_FIELD_TYPES);
-				theOne.initializeVideoGameDBFromFile();
-				rs = theOne.mVideoGameDB.getAllRecords();
-				while (rs.next())
-				{
-					int id = rs.getInt(VIDEO_GAME_FIELD_NAMES[0]);
-					String name = rs.getString(VIDEO_GAME_FIELD_NAMES[1]);
-					String platform = rs.getString(VIDEO_GAME_FIELD_NAMES[2]);
-					int year = rs.getInt(VIDEO_GAME_FIELD_NAMES[3]);
-					String genre = rs.getString(VIDEO_GAME_FIELD_NAMES[4]);
-					String publisher = rs.getString(VIDEO_GAME_FIELD_NAMES[5]);
-					theOne.mAllGamesList.add(new VideoGame(id, name, platform, year, genre, publisher));
+				theOne.mEasyShipsDB = new DBModel(DB_NAME, SHIP_E_TABLE_NAME, SHIP_FIELD_NAMES, SHIP_FIELD_TYPES);
+				records = theOne.mEasyShipsDB.getAllRecords();
+				for(ArrayList<String> rs: records) {
+					int id = Integer.parseInt(rs.get(0));
+					int row = Integer.parseInt(rs.get(1));
+					String col = rs.get(2);
+					boolean player = rs.get(3).equals("1");
+					boolean down = rs.get(4).equals("1");
+					theOne.mAllShipList.add(new Ship(id, col, row, player, 1, down));
 				}
-
-				theOne.mUserGamesDB= new DBModel(DB_NAME, USER_GAMES_TABLE_NAME, USER_GAMES_FIELD_NAMES, USER_GAMES_FIELD_TYPES);
+				
+				theOne.mNormShipsDB = new DBModel(DB_NAME, SHIP_N_TABLE_NAME, SHIP_FIELD_NAMES, SHIP_FIELD_TYPES);
+				records = theOne.mNormShipsDB.getAllRecords();
+				for(ArrayList<String> rs: records) {
+					int id = Integer.parseInt(rs.get(0));
+					int row = Integer.parseInt(rs.get(1));
+					String col = rs.get(2);
+					boolean player = rs.get(3).equals("1");
+					boolean down = rs.get(4).equals("1");
+					theOne.mAllShipList.add(new Ship(id, col, row, player, 2, down));
+				}
+				
+				theOne.mHardShipsDB = new DBModel(DB_NAME, SHIP_H_TABLE_NAME, SHIP_FIELD_NAMES, SHIP_FIELD_TYPES);
+				records = theOne.mHardShipsDB.getAllRecords();
+				for(ArrayList<String> rs: records) {
+					int id = Integer.parseInt(rs.get(0));
+					int row = Integer.parseInt(rs.get(1));
+					String col = rs.get(2);
+					boolean player = rs.get(3).equals("1");
+					boolean down = rs.get(4).equals("1");
+					theOne.mAllShipList.add(new Ship(id, col, row, player, 3, down));
+				}
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -82,193 +121,34 @@ public class Controller {
 		return theOne;
 	}
 
-	public boolean isValidPassword(String password)
+	public ObservableList<Missile> getMissilesLaunched(boolean player)
 	{
-		// Valid password must contain (see regex below):
-		// At least one lower case letter
-		// At least one digit
-		// At least one special character (@, #, $, %, !)
-		// At least one upper case letter
-		// At least 8 characters long, but no more than 16
-		return password.matches("((?=.*[a-z])(?=.*d)(?=.*[@#$%!])(?=.*[A-Z]).{8,16})");
-	}
-
-	public boolean isValidEmail(String email)
-	{
-		return email.matches(
-				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-				+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-	}
-
-	public String signUpUser(String name, String email, String password)
-	{
-		//TODO: Validate email
-	    if(!theOne.isValidEmail(email))
-	        return "Email is not valid. Please use a real address.";
-
-	    if(!theOne.isValidPassword(password))
-            return "Password needs to be 8-16 characters long w/ \na lower case letter \nan upper case letter\na digit \nand one of these characters: @#$%!";
-
-	    //Check if user exists
-	    for(User user: theOne.mAllUsersList)
-	        if(user.getEmail().equals(email))
-	            return "Email already exists. Please use different address.";
-
-	    //Adding user to database
-	    String[] values = {name, email, "STANDARD", password};
-	    try
-        {
-            int id = theOne.mUserDB.createRecord(Arrays.copyOfRange(USER_FIELD_NAMES, 1, USER_FIELD_NAMES.length), values);
-            User newUser = new User(id, name, email, "STANDARD");
-            theOne.mAllUsersList.add(newUser);
-            theOne.mCurrentUser = newUser;
-            return "SUCCESS";
-        }
-        catch (SQLException e)
-        {
-            return "Unable to register. Try again later.";
-        }
-	}
-
-	public String signInUser(String email, String password) {
-
-	    for(User user: theOne.mAllUsersList)
-	    {
-	        if(user.getEmail().equals(email))
-	        {
-	            try
-                {
-                    ResultSet rs = theOne.mUserDB.getRecord(String.valueOf(user.getId()));
-                    if(password.equals(rs.getString(USER_FIELD_NAMES[4])))
-                    {
-                        theOne.mCurrentUser = user;
-                        return "SUCCESS";
-                    }
-                    return "Email address and password combination incorrect. Please try again.";
-                }
-                catch (SQLException e)
-                {
-                    return "Email address and password combination incorrect. Please try again.";
-                }
-
-	        }
-	    }
-
-		return "Email address and password combination incorrect. Please try again.";
-	}
-
-	public ObservableList<VideoGame> getGamesForCurrentUser()
-	{
-		ObservableList<VideoGame> userGamesList = FXCollections.observableArrayList();
-		//Querying UserGames
-		try
-        {
-            ResultSet rs = theOne.mUserGamesDB.getRecord(String.valueOf(theOne.mCurrentUser.getId()));
-            while(rs.next())
-            {
-                // Grab game ID from result set
-                int gameID = rs.getInt(2);
-                for(VideoGame vg: theOne.mAllGamesList)
-                    if(vg.getId() == gameID)
-                        userGamesList.add(vg);
-            }
-        }
-        catch (SQLException e)
-        {
-            return userGamesList;
-        }
-
-		return userGamesList;
-	}
-
-	public boolean addGameToUsersInventory(VideoGame selectedGame)  {
-	    ObservableList<VideoGame> gamesForCurrentUser = theOne.getGamesForCurrentUser();
-	    if(gamesForCurrentUser.contains(selectedGame))
-	        return false;
-
-	    //If game is new, add to relation table
-	    String[] values = {String.valueOf(theOne.mCurrentUser.getId()),String.valueOf(selectedGame.getId())};
-		try
-        {
-            theOne.mUserGamesDB.createRecord(USER_GAMES_FIELD_NAMES, values);
-        }
-        catch (SQLException e)
-        {
-            return false;
-        }
-		return true;
-	}
-
-
-	public User getCurrentUser()
-	{
-		return mCurrentUser;
-	}
-
-
-	public ObservableList<User> getAllUsers() {
-		return theOne.mAllUsersList;
-	}
-
-	public ObservableList<VideoGame> getAllVideoGames() {
-		return theOne.mAllGamesList;
-	}
-
-	public ObservableList<String> getDistinctPlatforms() {
-		ObservableList<String> platforms = FXCollections.observableArrayList();
-		for (VideoGame vg : theOne.mAllGamesList)
-			if (!platforms.contains(vg.getPlatform()))
-				platforms.add(vg.getPlatform());
-		FXCollections.sort(platforms);
-		return platforms;
-	}
-
-	public ObservableList<String> getDistinctPublishers() {
-		ObservableList<String> publishers = FXCollections.observableArrayList();
-		for (VideoGame vg : theOne.mAllGamesList)
-			if (!publishers.contains(vg.getPublisher()))
-				publishers.add(vg.getPublisher());
-		FXCollections.sort(publishers);
-		return publishers;
-	}
-
-
-
-	private int initializeVideoGameDBFromFile() throws SQLException {
-		int recordsCreated = 0;
-
-		// If the result set contains results, database table already has
-		// records, no need to populate from file (so return false)
-		if (theOne.mUserDB.getRecordCount() > 0)
-			return 0;
-
-		try {
-			// Otherwise, open the file (CSV file) and insert user data
-			// into database
-			Scanner fileScanner = new Scanner(new File(VIDEO_GAME_DATA_FILE));
-			// First read is for headings:
-			fileScanner.nextLine();
-			// All subsequent reads are for user data
-			while (fileScanner.hasNextLine()) {
-				String[] data = fileScanner.nextLine().split(",");
-				// Length of values is one less than field names because values
-				// does not have id (DB will assign one)
-				String[] values = new String[VIDEO_GAME_FIELD_NAMES.length - 1];
-				values[0] = data[1].replaceAll("'", "''");
-				values[1] = data[2];
-				values[2] = data[3];
-				values[3] = data[4];
-				values[4] = data[5];
-				theOne.mVideoGameDB.createRecord(Arrays.copyOfRange(VIDEO_GAME_FIELD_NAMES, 1, VIDEO_GAME_FIELD_NAMES.length), values);
-				recordsCreated++;
-			}
-
-			// All done with the CSV file, close the connection
-			fileScanner.close();
-		} catch (FileNotFoundException e) {
-			return 0;
+		ObservableList<Missile> missiles = FXCollections.observableArrayList();
+		for(Missile rocket : theOne.mAllMissileList)
+		{
+			if(rocket.isPlayer() == player && rocket.getDifficulty()== mDifficulty)
+				missiles.add(rocket);
 		}
-		return recordsCreated;
+		return missiles;
 	}
 
+	public ObservableList<Ship> getShips(boolean player)
+	{
+		ObservableList<Ship> ships = FXCollections.observableArrayList();
+		for(Ship boat : theOne.mAllShipList)
+		{
+			if(boat.isPlayer() == player && boat.getDifficulty()== mDifficulty)
+				ships.add(boat);
+		}
+		return ships;
+	}
+
+	public ObservableList<Missile> getAllMissiles()
+	{
+		return theOne.mAllMissileList;
+	}
+
+	public ObservableList<Ship> getAllShips() {
+		return theOne.mAllShipList;
+	}
 }
