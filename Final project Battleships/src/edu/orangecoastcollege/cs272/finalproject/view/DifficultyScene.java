@@ -16,14 +16,21 @@ public class DifficultyScene {
 	private Button difficultyChooseBtn;
 
 	@FXML
-	public Object initialize(){
+	public Object initialize() {
 		difficultyCB.setItems(controller.getDifficulty());
 
 		return this;
 	}
 
 	@FXML
-	public Object difficultyClick(){
-		return null;
+	public Object difficultyClick() {
+		if (controller.checkIfGameAlreadyExsists(difficultyCB.getItems()) && difficultyCB.getItems() != null) {
+			ViewNavigator.loadScene("Confirmation Scene", ViewNavigator.CONFIRMATION_SCENE);
+			return this;
+		}
+
+		ViewNavigator.loadScene("", ViewNavigator.DIFFICULTY_REVIEW_SCENE);
+
+		return this;
 	}
 }

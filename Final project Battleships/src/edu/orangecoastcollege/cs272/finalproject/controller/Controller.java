@@ -7,6 +7,7 @@ import edu.orangecoastcollege.cs272.finalproject.model.Missile;
 import edu.orangecoastcollege.cs272.finalproject.model.Ship;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 
 public class Controller {
 
@@ -159,5 +160,11 @@ public class Controller {
 		difficulty.add("Hard");
 
 		return difficulty;
+	}
+
+	public boolean checkIfGameAlreadyExsists(ObservableList<String> select){
+
+
+		return false;
 	}
 }
