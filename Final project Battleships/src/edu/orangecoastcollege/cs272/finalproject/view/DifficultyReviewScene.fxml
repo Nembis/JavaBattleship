@@ -25,16 +25,16 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="8.0" prefWidth="65.0" text="Continue" />
-                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" text="Return" />
+                  <Button mnemonicParsing="false" prefWidth="65.0" text="Continue" />
+                  <Button mnemonicParsing="false" prefWidth="65.0" text="Return" />
                </children>
                <opaqueInsets>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </opaqueInsets>
             </HBox>
-            <Label text="The board size is " />
-            <Label prefHeight="21.0" prefWidth="166.0" text="YOu start with  x lucky missile." GridPane.rowIndex="1" />
-            <Label text="Your opponent starts with X missiles." GridPane.rowIndex="2" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="The board size is " />
+            <Label alignment="CENTER" prefHeight="21.0" prefWidth="166.0" text="You start with  x lucky missile." GridPane.columnSpan="2" GridPane.rowIndex="1" />
+            <Label alignment="CENTER" text="Your opponent starts with X missiles." GridPane.columnSpan="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>
