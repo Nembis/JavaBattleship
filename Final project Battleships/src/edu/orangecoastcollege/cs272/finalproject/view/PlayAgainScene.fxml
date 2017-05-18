@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane prefHeight="75.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="45.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+   </rowConstraints>
+   <columnConstraints>
+      <ColumnConstraints minWidth="10.0" prefWidth="150.0" />
+   </columnConstraints>
+   <children>
+      <HBox alignment="CENTER" minWidth="150.0" prefHeight="100.0" prefWidth="300.0" spacing="3.0" GridPane.rowIndex="1">
+         <children>
+            <Button fx:id="playAgainBtn" mnemonicParsing="false" onAction="#playAgainClick" prefHeight="25.0" prefWidth="72.0" text="Play Again" />
+            <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#closeClick" prefHeight="25.0" prefWidth="72.0" text="Close" />
+         </children>
+      </HBox>
+      <Label text="Do you wish to play another game?" textAlignment="CENTER" wrapText="true" />
+   </children>
+</GridPane>
