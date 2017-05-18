@@ -10,14 +10,9 @@ public class ViewNavigator {
 	public static final String DIFFICULTY_SCENE = "DifficultyScene.fxml";
 	public static final String CONFIRMATION_SCENE = "ConfirmationScene.fxml";
 	public static final String DIFFICULTY_REVIEW_SCENE = "DifficultyReviewScene.fxml";
-<<<<<<< HEAD
 	public static final String WELCOME_SCENE = "WelcomeScene.fxml";
 	public static final String PLAY_AGAIN_SCENE = "PlayAgainScene.fxml";
-	
-=======
-	public static final String PLAY_AGAIN_SCENE = "PlayAgainScene.fxml";
->>>>>>> branch 'master' of ssh://git@github.com/Nembis/JavaBattleship.git
-	
+
 	public static Stage mainStage;
 
 	public static void setStage(Stage stage) {

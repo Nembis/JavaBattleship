@@ -1,6 +1,7 @@
 package edu.orangecoastcollege.cs272.finalproject.view;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 public class WelcomeScene {
 
