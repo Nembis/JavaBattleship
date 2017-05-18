@@ -8,13 +8,20 @@ import javafx.scene.control.ComboBox;
 public class DifficultyScene {
 
 	private static Controller controller = Controller.getInstance();
-	
+
 	@FXML
 	private ComboBox<String> difficultyCB;
-	
+
 	@FXML
 	private Button difficultyChooseBtn;
-	
+
+	@FXML
+	public Object initialize(){
+		difficultyCB.setItems(controller.getDifficulty());
+
+		return this;
+	}
+
 	@FXML
 	public Object difficultyClick(){
 		return null;

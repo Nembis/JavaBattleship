@@ -19,7 +19,7 @@ public class Controller {
 	private static final String MISSILE_H_TABLE_NAME = "hard_missiles";
 	private static final String[] MISSILE_FIELD_NAMES = {"id", "col", "row", "player_owned","lucky"};
 	private static final String[] MISSILE_FIELD_TYPES = {"INTEGER PRIMARY KEY","TEXT","INTEGER","INTEGER","INTEGER"};
-	
+
 	private static final String SHIP_E_TABLE_NAME = "easy_ships";
 	private static final String SHIP_N_TABLE_NAME = "norm_ships";
 	private static final String SHIP_H_TABLE_NAME = "hard_ships";
@@ -58,7 +58,7 @@ public class Controller {
 					boolean lucky = rs.get(4).equals("1");
 					theOne.mAllMissileList.add(new Missile(id, col, row, player, 1, lucky));
 				}
-				
+
 				theOne.mNormMissilesDB = new DBModel(DB_NAME, MISSILE_N_TABLE_NAME, MISSILE_FIELD_NAMES, MISSILE_FIELD_TYPES);
 				records = theOne.mNormMissilesDB.getAllRecords();
 				for(ArrayList<String> rs: records) {
@@ -69,7 +69,7 @@ public class Controller {
 					boolean lucky = rs.get(4).equals("1");
 					theOne.mAllMissileList.add(new Missile(id, col, row, player, 2, lucky));
 				}
-				
+
 				theOne.mHardMissilesDB = new DBModel(DB_NAME, MISSILE_H_TABLE_NAME, MISSILE_FIELD_NAMES, MISSILE_FIELD_TYPES);
 				records = theOne.mHardMissilesDB.getAllRecords();
 				for(ArrayList<String> rs: records) {
@@ -91,7 +91,7 @@ public class Controller {
 					boolean down = rs.get(4).equals("1");
 					theOne.mAllShipList.add(new Ship(id, col, row, player, 1, down));
 				}
-				
+
 				theOne.mNormShipsDB = new DBModel(DB_NAME, SHIP_N_TABLE_NAME, SHIP_FIELD_NAMES, SHIP_FIELD_TYPES);
 				records = theOne.mNormShipsDB.getAllRecords();
 				for(ArrayList<String> rs: records) {
@@ -102,7 +102,7 @@ public class Controller {
 					boolean down = rs.get(4).equals("1");
 					theOne.mAllShipList.add(new Ship(id, col, row, player, 2, down));
 				}
-				
+
 				theOne.mHardShipsDB = new DBModel(DB_NAME, SHIP_H_TABLE_NAME, SHIP_FIELD_NAMES, SHIP_FIELD_TYPES);
 				records = theOne.mHardShipsDB.getAllRecords();
 				for(ArrayList<String> rs: records) {
@@ -150,5 +150,14 @@ public class Controller {
 
 	public ObservableList<Ship> getAllShips() {
 		return theOne.mAllShipList;
+	}
+
+	public ObservableList<String> getDifficulty(){
+		ObservableList<String> difficulty = FXCollections.observableArrayList();
+		difficulty.add("Easy");
+		difficulty.add("Normal");
+		difficulty.add("Hard");
+
+		return difficulty;
 	}
 }
