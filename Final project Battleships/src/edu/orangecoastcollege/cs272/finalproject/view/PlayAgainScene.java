@@ -15,13 +15,13 @@ public class PlayAgainScene {
 	{
 		ViewNavigator.loadScene("Difficulty Scene", ViewNavigator.DIFFICULTY_SCENE);
 		
-		return null;
+		return this;
 	}
 	
 	@FXML
 	public Object closeClick()
 	{
 		System.exit(0);
-		return null;
+		return this;
 	}
 }

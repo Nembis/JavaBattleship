@@ -13,17 +13,25 @@ import javafx.scene.control.ComboBox;
 
 public class DifficultyScene implements Initializable {
 
-	//private static Controller controller = Controller.getInstance();
-	
+	private static Controller controller = Controller.getInstance();
+
 	@FXML
 	private ComboBox<String> difficultyCB;
-	
+
 	@FXML
 	private Button difficultyChooseBtn;
-	
+
 	@FXML
-	public Object difficultyClick(){
-		return null;
+	public Object difficultyClick() {
+		
+		if (controller.checkIfGameAlreadyExists(difficultyCB.getItems()) && difficultyCB.getItems() != null) {
+			ViewNavigator.loadScene("Confirmation Scene", ViewNavigator.CONFIRMATION_SCENE);
+			return this;
+		}
+
+		ViewNavigator.loadScene("", ViewNavigator.DIFFICULTY_REVIEW_SCENE);
+
+		return this;
 	}
 
 	@Override

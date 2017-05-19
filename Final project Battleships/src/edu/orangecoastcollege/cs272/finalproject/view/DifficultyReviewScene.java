@@ -14,7 +14,7 @@ public class DifficultyReviewScene {
 	@FXML
 	public Object loadDifficultyScene() {
 		
-		ViewNavigator.loadScene("Difficulty Scene", ViewNavigator.DIFFICULTY_REVIEW_SCENE);
+		ViewNavigator.loadScene("Difficulty Scene", ViewNavigator.DIFFICULTY_SCENE);
 		
 		return this;
 	}
