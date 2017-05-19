@@ -24,7 +24,7 @@ public class DifficultyScene implements Initializable {
 	@FXML
 	public Object difficultyClick() {
 		
-		if (controller.checkIfGameAlreadyExists(difficultyCB.getItems()) && difficultyCB.getItems() != null) {
+		if (controller.checkIfGameAlreadyExists(difficultyCB.getSelectionModel().getSelectedIndex())) {
 			ViewNavigator.loadScene("Confirmation Scene", ViewNavigator.CONFIRMATION_SCENE);
 			return this;
 		}

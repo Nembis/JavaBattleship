@@ -18,14 +18,15 @@ public class Controller {
 	private static final String MISSILE_E_TABLE_NAME = "easy_missiles";
 	private static final String MISSILE_N_TABLE_NAME = "norm_missiles";
 	private static final String MISSILE_H_TABLE_NAME = "hard_missiles";
-	private static final String[] MISSILE_FIELD_NAMES = {"id", "col", "row", "player_owned","lucky"};
-	private static final String[] MISSILE_FIELD_TYPES = {"INTEGER PRIMARY KEY","TEXT","INTEGER","INTEGER","INTEGER"};
+	private static final String[] MISSILE_FIELD_NAMES = { "id", "col", "row", "player_owned", "lucky" };
+	private static final String[] MISSILE_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER",
+			"INTEGER" };
 
 	private static final String SHIP_E_TABLE_NAME = "easy_ships";
 	private static final String SHIP_N_TABLE_NAME = "norm_ships";
 	private static final String SHIP_H_TABLE_NAME = "hard_ships";
-	private static final String[] SHIP_FIELD_NAMES = {"id", "col", "row", "player_owned","down"};
-	private static final String[] SHIP_FIELD_TYPES = {"INTEGER PRIMARY KEY","TEXT","INTEGER","INTEGER","INTEGER"};
+	private static final String[] SHIP_FIELD_NAMES = { "id", "col", "row", "player_owned", "down" };
+	private static final String[] SHIP_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER" };
 
 	private int mDifficulty;
 	private DBModel mEasyShipsDB;
@@ -34,7 +35,7 @@ public class Controller {
 	private DBModel mNormMissilesDB;
 	private DBModel mHardShipsDB;
 	private DBModel mHardMissilesDB;
-	//private DBModel mHighScoreDB;
+	// private DBModel mHighScoreDB;
 
 	private ObservableList<Missile> mAllMissileList;
 	private ObservableList<Ship> mAllShipList;
@@ -49,9 +50,10 @@ public class Controller {
 			theOne.mAllShipList = FXCollections.observableArrayList();
 
 			try {
-				theOne.mEasyMissilesDB = new DBModel(DB_NAME, MISSILE_E_TABLE_NAME, MISSILE_FIELD_NAMES, MISSILE_FIELD_TYPES);
+				theOne.mEasyMissilesDB = new DBModel(DB_NAME, MISSILE_E_TABLE_NAME, MISSILE_FIELD_NAMES,
+						MISSILE_FIELD_TYPES);
 				ArrayList<ArrayList<String>> records = theOne.mEasyMissilesDB.getAllRecords();
-				for(ArrayList<String> rs: records) {
+				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
 					int row = Integer.parseInt(rs.get(1));
 					String col = rs.get(2);
@@ -60,9 +62,10 @@ public class Controller {
 					theOne.mAllMissileList.add(new Missile(id, col, row, player, 1, lucky));
 				}
 
-				theOne.mNormMissilesDB = new DBModel(DB_NAME, MISSILE_N_TABLE_NAME, MISSILE_FIELD_NAMES, MISSILE_FIELD_TYPES);
+				theOne.mNormMissilesDB = new DBModel(DB_NAME, MISSILE_N_TABLE_NAME, MISSILE_FIELD_NAMES,
+						MISSILE_FIELD_TYPES);
 				records = theOne.mNormMissilesDB.getAllRecords();
-				for(ArrayList<String> rs: records) {
+				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
 					int row = Integer.parseInt(rs.get(1));
 					String col = rs.get(2);
@@ -71,9 +74,10 @@ public class Controller {
 					theOne.mAllMissileList.add(new Missile(id, col, row, player, 2, lucky));
 				}
 
-				theOne.mHardMissilesDB = new DBModel(DB_NAME, MISSILE_H_TABLE_NAME, MISSILE_FIELD_NAMES, MISSILE_FIELD_TYPES);
+				theOne.mHardMissilesDB = new DBModel(DB_NAME, MISSILE_H_TABLE_NAME, MISSILE_FIELD_NAMES,
+						MISSILE_FIELD_TYPES);
 				records = theOne.mHardMissilesDB.getAllRecords();
-				for(ArrayList<String> rs: records) {
+				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
 					int row = Integer.parseInt(rs.get(1));
 					String col = rs.get(2);
@@ -84,7 +88,7 @@ public class Controller {
 
 				theOne.mEasyShipsDB = new DBModel(DB_NAME, SHIP_E_TABLE_NAME, SHIP_FIELD_NAMES, SHIP_FIELD_TYPES);
 				records = theOne.mEasyShipsDB.getAllRecords();
-				for(ArrayList<String> rs: records) {
+				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
 					int row = Integer.parseInt(rs.get(1));
 					String col = rs.get(2);
@@ -95,7 +99,7 @@ public class Controller {
 
 				theOne.mNormShipsDB = new DBModel(DB_NAME, SHIP_N_TABLE_NAME, SHIP_FIELD_NAMES, SHIP_FIELD_TYPES);
 				records = theOne.mNormShipsDB.getAllRecords();
-				for(ArrayList<String> rs: records) {
+				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
 					int row = Integer.parseInt(rs.get(1));
 					String col = rs.get(2);
@@ -106,7 +110,7 @@ public class Controller {
 
 				theOne.mHardShipsDB = new DBModel(DB_NAME, SHIP_H_TABLE_NAME, SHIP_FIELD_NAMES, SHIP_FIELD_TYPES);
 				records = theOne.mHardShipsDB.getAllRecords();
-				for(ArrayList<String> rs: records) {
+				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
 					int row = Integer.parseInt(rs.get(1));
 					String col = rs.get(2);
@@ -122,30 +126,25 @@ public class Controller {
 		return theOne;
 	}
 
-	public ObservableList<Missile> getMissilesLaunched(boolean player)
-	{
+	public ObservableList<Missile> getMissilesLaunched(boolean player) {
 		ObservableList<Missile> missiles = FXCollections.observableArrayList();
-		for(Missile rocket : theOne.mAllMissileList)
-		{
-			if(rocket.isPlayer() == player && rocket.getDifficulty()== mDifficulty)
+		for (Missile rocket : theOne.mAllMissileList) {
+			if (rocket.isPlayer() == player && rocket.getDifficulty() == mDifficulty)
 				missiles.add(rocket);
 		}
 		return missiles;
 	}
 
-	public ObservableList<Ship> getShips(boolean player)
-	{
+	public ObservableList<Ship> getShips(boolean player) {
 		ObservableList<Ship> ships = FXCollections.observableArrayList();
-		for(Ship boat : theOne.mAllShipList)
-		{
-			if(boat.isPlayer() == player && boat.getDifficulty()== mDifficulty)
+		for (Ship boat : theOne.mAllShipList) {
+			if (boat.isPlayer() == player && boat.getDifficulty() == mDifficulty)
 				ships.add(boat);
 		}
 		return ships;
 	}
 
-	public ObservableList<Missile> getAllMissiles()
-	{
+	public ObservableList<Missile> getAllMissiles() {
 		return theOne.mAllMissileList;
 	}
 
@@ -153,7 +152,7 @@ public class Controller {
 		return theOne.mAllShipList;
 	}
 
-	public ObservableList<String> getDifficulty(){
+	public ObservableList<String> getDifficulty() {
 		ObservableList<String> difficulty = FXCollections.observableArrayList();
 		difficulty.add("Easy");
 		difficulty.add("Normal");
@@ -162,9 +161,42 @@ public class Controller {
 		return difficulty;
 	}
 
-	public boolean checkIfGameAlreadyExists(ObservableList<String> select){
+	public boolean checkIfGameAlreadyExists(int select) throws SQLException {
 
+		switch (select) {
+		case 0:
+			if (theOne.mEasyShipsDB.getRecordCount() > 0)
+				return true;
 
-		return false;
+		case 1:
+			if (theOne.mNormShipsDB.getRecordCount() > 0)
+				return true;
+
+		case 2:
+			if (theOne.mHardShipsDB.getRecordCount() > 0)
+				return true;
+
+		default:
+			return false;
+		}
 	}
+	
+	/*
+	public boolean validShipPlacement(char col, int rol){
+		
+		int length = theOne.mAllShipList.size();
+		
+		switch(theOne.mDifficulty)
+		{
+		case 0:
+			for(int i = 0; i < length; i++){
+				if(theOne.mAllShipList)
+			}
+		
+		
+		}
+		
+		return false;
+	}*/
+	
 }
