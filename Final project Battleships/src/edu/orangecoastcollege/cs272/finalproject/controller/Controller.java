@@ -162,7 +162,7 @@ public class Controller {
 		return difficulty;
 	}
 
-	public boolean checkIfGameAlreadyExsists(ObservableList<String> select){
+	public boolean checkIfGameAlreadyExists(ObservableList<String> select){
 
 
 		return false;

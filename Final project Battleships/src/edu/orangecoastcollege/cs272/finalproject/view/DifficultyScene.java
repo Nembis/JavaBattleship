@@ -24,7 +24,7 @@ public class DifficultyScene {
 
 	@FXML
 	public Object difficultyClick() {
-		if (controller.checkIfGameAlreadyExsists(difficultyCB.getItems()) && difficultyCB.getItems() != null) {
+		if (controller.checkIfGameAlreadyExists(difficultyCB.getItems()) && difficultyCB.getItems() != null) {
 			ViewNavigator.loadScene("Confirmation Scene", ViewNavigator.CONFIRMATION_SCENE);
 			return this;
 		}
