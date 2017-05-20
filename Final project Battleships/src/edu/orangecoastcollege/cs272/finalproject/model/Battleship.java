@@ -3,12 +3,12 @@ package edu.orangecoastcollege.cs272.finalproject.model;
 public abstract class Battleship {
 
 	protected int mId;
-	protected String mAphaCol;
+	protected char mAphaCol;
 	protected int mNumRol;
 	protected boolean mIsPlayer;
 	protected int mDifficulty;
 
-	Battleship(int id, String aphaCol, int numRol, boolean player, int difficulty) {
+	Battleship(int id, char aphaCol, int numRol, boolean player, int difficulty) {
 		super();
 		mId = id;
 		mAphaCol = aphaCol;
@@ -21,11 +21,11 @@ public abstract class Battleship {
 		return mId;
 	}
 
-	public String getAphaCol() {
+	public char getAphaCol() {
 		return mAphaCol;
 	}
 
-	public void setAphaCol(String aphaCol) {
+	public void setAphaCol(char aphaCol) {
 		mAphaCol = aphaCol;
 	}
 
@@ -57,7 +57,8 @@ public abstract class Battleship {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((mAphaCol == null) ? 0 : mAphaCol.hashCode());
+		result = prime * result + mAphaCol;
+		result = prime * result + mDifficulty;
 		result = prime * result + mId;
 		result = prime * result + (mIsPlayer ? 1231 : 1237);
 		result = prime * result + mNumRol;
@@ -73,10 +74,9 @@ public abstract class Battleship {
 		if (getClass() != obj.getClass())
 			return false;
 		Battleship other = (Battleship) obj;
-		if (mAphaCol == null) {
-			if (other.mAphaCol != null)
-				return false;
-		} else if (!mAphaCol.equals(other.mAphaCol))
+		if (mAphaCol != other.mAphaCol)
+			return false;
+		if (mDifficulty != other.mDifficulty)
 			return false;
 		if (mId != other.mId)
 			return false;

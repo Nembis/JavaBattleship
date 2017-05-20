@@ -180,23 +180,32 @@ public class Controller {
 			return false;
 		}
 	}
-	
-	/*
-	public boolean validShipPlacement(char col, int rol){
-		
-		int length = theOne.mAllShipList.size();
-		
-		switch(theOne.mDifficulty)
-		{
-		case 0:
-			for(int i = 0; i < length; i++){
-				if(theOne.mAllShipList)
-			}
-		
-		
+
+	public boolean validShipPlacement(char col, int rol) {
+
+		for(Ship boat : theOne.mAllShipList){
+			if(col == boat.getAphaCol() && rol == boat.getNumRol() && theOne.mDifficulty == boat.getDifficulty())
+				return false;
 		}
 		
-		return false;
-	}*/
+		return true;
+	}
 	
+	public boolean addShip(char col, int rol){
+		
+		if(theOne.validShipPlacement(col, rol)){
+			switch(theOne.mDifficulty){
+			case 0:
+				try {
+					theOne.mEasyShipsDB.createRecord(SHIP_FIELD_NAMES, SHIP_FIELD_TYPES);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return true;
+	}
+
 }
