@@ -4,7 +4,7 @@ public class Ship extends Battleship {
 
 	private boolean mIsDestroy;
 
-	public Ship(int id, String aphaCol, int numRol, boolean isPlayer, int difficulty, boolean isDestroy) {
+	public Ship(int id, char aphaCol, int numRol, boolean isPlayer, int difficulty, boolean isDestroy) {
 		super(id, aphaCol, numRol, isPlayer, difficulty);
 		mIsDestroy = isDestroy;
 	}

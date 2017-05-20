@@ -2,12 +2,13 @@ package edu.orangecoastcollege.cs272.finalproject.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import edu.orangecoastcollege.cs272.finalproject.model.DBModel;
 import edu.orangecoastcollege.cs272.finalproject.model.Missile;
 import edu.orangecoastcollege.cs272.finalproject.model.Ship;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
 
 public class Controller {
 
@@ -56,7 +57,7 @@ public class Controller {
 				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
 					int row = Integer.parseInt(rs.get(1));
-					String col = rs.get(2);
+					char col = rs.get(2).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean lucky = rs.get(4).equals("1");
 					theOne.mAllMissileList.add(new Missile(id, col, row, player, 1, lucky));
@@ -68,7 +69,7 @@ public class Controller {
 				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
 					int row = Integer.parseInt(rs.get(1));
-					String col = rs.get(2);
+					char col = rs.get(2).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean lucky = rs.get(4).equals("1");
 					theOne.mAllMissileList.add(new Missile(id, col, row, player, 2, lucky));
@@ -80,7 +81,7 @@ public class Controller {
 				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
 					int row = Integer.parseInt(rs.get(1));
-					String col = rs.get(2);
+					char col = rs.get(2).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean lucky = rs.get(4).equals("1");
 					theOne.mAllMissileList.add(new Missile(id, col, row, player, 3, lucky));
@@ -91,7 +92,7 @@ public class Controller {
 				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
 					int row = Integer.parseInt(rs.get(1));
-					String col = rs.get(2);
+					char col = rs.get(2).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean down = rs.get(4).equals("1");
 					theOne.mAllShipList.add(new Ship(id, col, row, player, 1, down));
@@ -102,7 +103,7 @@ public class Controller {
 				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
 					int row = Integer.parseInt(rs.get(1));
-					String col = rs.get(2);
+					char col = rs.get(2).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean down = rs.get(4).equals("1");
 					theOne.mAllShipList.add(new Ship(id, col, row, player, 2, down));
@@ -113,7 +114,7 @@ public class Controller {
 				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
 					int row = Integer.parseInt(rs.get(1));
-					String col = rs.get(2);
+					char col = rs.get(2).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean down = rs.get(4).equals("1");
 					theOne.mAllShipList.add(new Ship(id, col, row, player, 3, down));
@@ -191,17 +192,29 @@ public class Controller {
 		return true;
 	}
 	
-	public boolean addShip(char col, int rol){
+	public boolean addShip(char col, int row, boolean player){
 		
-		if(theOne.validShipPlacement(col, rol)){
+		if(theOne.validShipPlacement(col, row)){
+			String colStr = String.valueOf(col);
+			String rolStr = String.valueOf(row);
+			String playStr = player?"1":"0";
+			String[] shipData = {colStr, rolStr, playStr, "0"};
+			int iD;
+			try {
 			switch(theOne.mDifficulty){
 			case 0:
-				try {
-					theOne.mEasyShipsDB.createRecord(SHIP_FIELD_NAMES, SHIP_FIELD_TYPES);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				iD = theOne.mEasyShipsDB.createRecord(Arrays.copyOfRange(SHIP_FIELD_NAMES, 1, SHIP_FIELD_NAMES.length), shipData);
+				break;
+			case 1:
+				iD = theOne.mNormShipsDB.createRecord(Arrays.copyOfRange(SHIP_FIELD_NAMES, 1, SHIP_FIELD_NAMES.length), shipData);
+				break;
+			default:
+				iD = theOne.mHardShipsDB.createRecord(Arrays.copyOfRange(SHIP_FIELD_NAMES, 1, SHIP_FIELD_NAMES.length), shipData);
+			}
+			theOne.mAllShipList.add(new Ship(iD, col, row, player, theOne.mDifficulty, false));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		
