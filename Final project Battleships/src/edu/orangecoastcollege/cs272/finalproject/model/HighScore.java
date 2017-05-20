@@ -53,8 +53,7 @@ public class HighScore implements Comparable<HighScore>{
 
 	@Override
 	public String toString() {
-		return mName + "[" + mDifficulty + " Difficulty, " + mTurns + " Turns, "
-				+ mLuckyUsed + " Lucky Missiles Used]";
+		return mName + "[" + mTurns + " Turns, " + mLuckyUsed + " Lucky Missiles Used]";
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import edu.orangecoastcollege.cs272.finalproject.model.DBModel;
+import edu.orangecoastcollege.cs272.finalproject.model.HighScore;
 import edu.orangecoastcollege.cs272.finalproject.model.Missile;
 import edu.orangecoastcollege.cs272.finalproject.model.Ship;
 import javafx.collections.FXCollections;
@@ -28,6 +29,10 @@ public class Controller {
 	private static final String SHIP_H_TABLE_NAME = "hard_ships";
 	private static final String[] SHIP_FIELD_NAMES = { "id", "col", "row", "player_owned", "down" };
 	private static final String[] SHIP_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER" };
+	
+	private static final String SCORE_TABLE_NAME = "high_scores";
+	private static final String[] SCORE_FIELD_NAMES = {"id","name","turns","difficulty","luckys"};
+	private static final String[] SCORE_FIELD_TYPES = {"INTEGER PRIMARY KEY","TEXT","INTEGER","TEXT","INTEGER"};
 
 	private int mDifficulty;
 	private DBModel mEasyShipsDB;
@@ -36,10 +41,11 @@ public class Controller {
 	private DBModel mNormMissilesDB;
 	private DBModel mHardShipsDB;
 	private DBModel mHardMissilesDB;
-	// private DBModel mHighScoreDB;
+	private DBModel mHighScoreDB;
 
 	private ObservableList<Missile> mAllMissileList;
 	private ObservableList<Ship> mAllShipList;
+	private ObservableList<HighScore> mScoreList;
 
 	private Controller() {
 	}
@@ -49,6 +55,7 @@ public class Controller {
 			theOne = new Controller();
 			theOne.mAllMissileList = FXCollections.observableArrayList();
 			theOne.mAllShipList = FXCollections.observableArrayList();
+			theOne.mScoreList = FXCollections.observableArrayList();
 
 			try {
 				theOne.mEasyMissilesDB = new DBModel(DB_NAME, MISSILE_E_TABLE_NAME, MISSILE_FIELD_NAMES,
@@ -119,6 +126,17 @@ public class Controller {
 					boolean down = rs.get(4).equals("1");
 					theOne.mAllShipList.add(new Ship(id, col, row, player, 3, down));
 				}
+				
+				theOne.mHighScoreDB = new DBModel(DB_NAME, SCORE_TABLE_NAME, SCORE_FIELD_NAMES, SCORE_FIELD_TYPES);
+				records = theOne.mHighScoreDB.getAllRecords();
+				for (ArrayList<String> rs : records) {
+					int id = Integer.parseInt(rs.get(0));
+					String name = rs.get(1);
+					int turns = Integer.parseInt(rs.get(1));
+					String diff = rs.get(2);
+					int lucks = Integer.parseInt(rs.get(3));
+					theOne.mScoreList.add(new HighScore(id, name, diff, turns, lucks));
+				}
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -153,13 +171,23 @@ public class Controller {
 		return theOne.mAllShipList;
 	}
 
-	public ObservableList<String> getDifficulty() {
-		ObservableList<String> difficulty = FXCollections.observableArrayList();
-		difficulty.add("Easy");
-		difficulty.add("Normal");
-		difficulty.add("Hard");
+	public ObservableList<HighScore> getScores(String difficulty)
+	{
+		ObservableList<HighScore> scores = FXCollections.observableArrayList();
+		for(HighScore hs: scores)
+		{
+			if(hs.getDifficulty().equals(difficulty))
+				scores.add(hs);
+		}
+		return scores;
+	}
+	
+	public int getDifficulty() {
+		return mDifficulty;
+	}
 
-		return difficulty;
+	public void setDifficulty(int difficulty) {
+		mDifficulty = difficulty;
 	}
 
 	public boolean checkIfGameAlreadyExists(int select) throws SQLException {
