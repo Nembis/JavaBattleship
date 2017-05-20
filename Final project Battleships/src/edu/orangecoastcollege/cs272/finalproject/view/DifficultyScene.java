@@ -1,6 +1,7 @@
 package edu.orangecoastcollege.cs272.finalproject.view;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import edu.orangecoastcollege.cs272.finalproject.controller.Controller;
@@ -24,9 +25,14 @@ public class DifficultyScene implements Initializable {
 	@FXML
 	public Object difficultyClick() {
 		
-		if (controller.checkIfGameAlreadyExists(difficultyCB.getSelectionModel().getSelectedIndex())) {
-			ViewNavigator.loadScene("Confirmation Scene", ViewNavigator.CONFIRMATION_SCENE);
-			return this;
+		try {
+			if (controller.checkIfGameAlreadyExists(difficultyCB.getSelectionModel().getSelectedIndex())) {
+				ViewNavigator.loadScene("Confirmation Scene", ViewNavigator.CONFIRMATION_SCENE);
+				return this;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		ViewNavigator.loadScene("", ViewNavigator.DIFFICULTY_REVIEW_SCENE);
