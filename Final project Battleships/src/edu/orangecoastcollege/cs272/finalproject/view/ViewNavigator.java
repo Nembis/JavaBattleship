@@ -18,6 +18,12 @@ public class ViewNavigator {
 	public static final String WELCOME_SCENE = "WelcomeScene.fxml";
 	public static final String PLAY_AGAIN_SCENE = "PlayAgainScene.fxml";
 	public static final String GAME_SETUP_SCENE = "GameSetupScene.fxml";
+	public static final String HIGH_SCORE_SCENE = "HighscoreScene.fxml";
+	public static final String MISSILE_LAUNCH_SCENE = "MissileLaunchScene.fxml";
+	public static final String MAIN_GAME_SCENE = "MainGameScene.fxml";
+	public static final String AI_CHOICE_SCENE = "AIChoiceScene.fxml";
+	public static final String LUCKY_MISSILE_MINIGAME_SCENE = "LuckyMissileMinigameScene.fxml";
+	public static final String GAME_OUTCOME_SCENE = "GameOutcomeScene.fxml";
 
 	private static Controller controller = Controller.getInstance();
 	public static Stage mainStage;

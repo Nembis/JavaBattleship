@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 
 import edu.orangecoastcollege.cs272.finalproject.controller.Controller;
 import edu.orangecoastcollege.cs272.finalproject.model.HighScore;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 
@@ -18,26 +20,21 @@ public class HighscoreScene implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		easyScores.setItems(controller.getScores("Easy"));
-		normScores.setItems(controller.getScores("Normal"));
-		hardScores.setItems(controller.getScores("Hard"));
+		ObservableList<HighScore> eScores = controller.getScores("Easy");
+		FXCollections.sort(eScores);
+		ObservableList<HighScore> nScores = controller.getScores("Normal");
+		FXCollections.sort(nScores);
+		ObservableList<HighScore> hScores = controller.getScores("Hard");
+		FXCollections.sort(hScores);
+		easyScores.setItems(eScores);
+		normScores.setItems(nScores);
+		hardScores.setItems(hScores);
+		
 	}
 	
 	public Object backToGame()
 	{
-		String title;
-		switch(controller.getDifficulty())
-		{
-		case 0:
-			title = "Launch your missile: Easy";
-			break;
-		case 1:
-			title = "Launch your missile: Normal";
-			break;
-		default:
-			title = "Launch your missile: Hard";
-		}
-		//ViewNavigator.loadScene(title, ViewNavigator.);
+		ViewNavigator.loadScene("Difficulty Scene", ViewNavigator.DIFFICULTY_SCENE);
 		return this;
 	}
 
