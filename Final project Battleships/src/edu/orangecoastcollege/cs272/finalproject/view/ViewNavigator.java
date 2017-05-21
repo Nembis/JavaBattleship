@@ -55,7 +55,7 @@ public class ViewNavigator {
 					{
 						if(boat.isDestroy())
 							board.add(new ImageView("GridPics/BurningSquare.png"), x, y);
-						else
+						else if(player)
 							board.add(new ImageView("GridPics/ShipSquare.png"), x, y);
 					}
 					else
