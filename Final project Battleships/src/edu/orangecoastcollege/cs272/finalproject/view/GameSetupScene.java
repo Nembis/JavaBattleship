@@ -27,7 +27,7 @@ public class GameSetupScene implements Initializable {
 	@FXML
 	private Button mPlaceBtn;
 	@FXML
-	private Button mPlay;
+	private Button mPlayBtn;
 	@FXML
 	private ListView<Ship> mShips;
 
@@ -43,14 +43,29 @@ public class GameSetupScene implements Initializable {
 			mCounterOfShips--;
 			mShips.setItems(controller.getShips(true));
 		}
-
+		
+		if(mCounterOfShips == 0)
+			mPlayBtn.setDisable(false);
+		else
+			mPlayBtn.setDisable(true);
+			
 		return this;
 	}
 
 	@FXML
 	public Object remove(){
 
-		controller.removeShip(mShips.getSelectionModel().getSelectedItem());
+		boolean remove = controller.removeShip(mShips.getSelectionModel().getSelectedItem());
+		
+		if(remove){
+			mCounterOfShips++;
+			mShips.setItems(controller.getShips(true));
+		}
+		
+		if(mCounterOfShips == 0)
+			mPlayBtn.setDisable(false);
+		else
+			mPlayBtn.setDisable(true);
 		
 		return this;
 	}
@@ -81,9 +96,16 @@ public class GameSetupScene implements Initializable {
 		mRolCB.getSelectionModel().select(1);
 
 		mNumOfShips.setText("10");
-
-		mPlay.setDisable(true);
-
+		
+		mPlayBtn.setDisable(true);
+	}
+	
+	@FXML
+	public Object loadMainGameScene(){
+		
+		ViewNavigator.loadScene("Main Game Scene", ViewNavigator.MAIN_GAME_SCENE);
+		
+		return this;
 	}
 
 }

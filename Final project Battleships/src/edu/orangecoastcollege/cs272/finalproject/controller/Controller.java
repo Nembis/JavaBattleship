@@ -29,10 +29,10 @@ public class Controller {
 	private static final String SHIP_H_TABLE_NAME = "hard_ships";
 	private static final String[] SHIP_FIELD_NAMES = { "id", "col", "row", "player_owned", "down" };
 	private static final String[] SHIP_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER", "INTEGER" };
-	
+
 	private static final String SCORE_TABLE_NAME = "high_scores";
-	private static final String[] SCORE_FIELD_NAMES = {"id","name","turns","difficulty","luckys"};
-	private static final String[] SCORE_FIELD_TYPES = {"INTEGER PRIMARY KEY","TEXT","INTEGER","TEXT","INTEGER"};
+	private static final String[] SCORE_FIELD_NAMES = { "id", "name", "turns", "difficulty", "luckys" };
+	private static final String[] SCORE_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "INTEGER", "TEXT", "INTEGER" };
 
 	private int mDifficulty;
 	private DBModel mEasyShipsDB;
@@ -126,7 +126,7 @@ public class Controller {
 					boolean down = rs.get(4).equals("1");
 					theOne.mAllShipList.add(new Ship(id, col, row, player, 3, down));
 				}
-				
+
 				theOne.mHighScoreDB = new DBModel(DB_NAME, SCORE_TABLE_NAME, SCORE_FIELD_NAMES, SCORE_FIELD_TYPES);
 				records = theOne.mHighScoreDB.getAllRecords();
 				for (ArrayList<String> rs : records) {
@@ -171,17 +171,15 @@ public class Controller {
 		return theOne.mAllShipList;
 	}
 
-	public ObservableList<HighScore> getScores(String difficulty)
-	{
+	public ObservableList<HighScore> getScores(String difficulty) {
 		ObservableList<HighScore> scores = FXCollections.observableArrayList();
-		for(HighScore hs: scores)
-		{
-			if(hs.getDifficulty().equals(difficulty))
+		for (HighScore hs : scores) {
+			if (hs.getDifficulty().equals(difficulty))
 				scores.add(hs);
 		}
 		return scores;
 	}
-	
+
 	public int getDifficulty() {
 		return mDifficulty;
 	}
@@ -212,72 +210,92 @@ public class Controller {
 
 	public boolean validShipPlacement(char col, int rol) {
 
-		for(Ship boat : theOne.mAllShipList){
-			if(col == boat.getAphaCol() && rol == boat.getNumRol() && theOne.mDifficulty == boat.getDifficulty())
+		for (Ship boat : theOne.mAllShipList) {
+			if (col == boat.getAphaCol() && rol == boat.getNumRol() && theOne.mDifficulty == boat.getDifficulty())
 				return false;
 		}
-		
+
 		return true;
 	}
-	
-	public boolean addShip(char col, int row, boolean player){
-		
-		if(theOne.validShipPlacement(col, row)){
+
+	public boolean addShip(char col, int row, boolean player) {
+
+		if (theOne.validShipPlacement(col, row)) {
 			String colStr = String.valueOf(col);
 			String rolStr = String.valueOf(row);
-			String playStr = player?"1":"0";
-			String[] shipData = {colStr, rolStr, playStr, "0"};
+			String playStr = player ? "1" : "0";
+			String[] shipData = { colStr, rolStr, playStr, "0" };
 			int iD;
 			try {
-			switch(theOne.mDifficulty){
-			case 0:
-				iD = theOne.mEasyShipsDB.createRecord(Arrays.copyOfRange(SHIP_FIELD_NAMES, 1, SHIP_FIELD_NAMES.length), shipData);
-				break;
-			case 1:
-				iD = theOne.mNormShipsDB.createRecord(Arrays.copyOfRange(SHIP_FIELD_NAMES, 1, SHIP_FIELD_NAMES.length), shipData);
-				break;
-			default:
-				iD = theOne.mHardShipsDB.createRecord(Arrays.copyOfRange(SHIP_FIELD_NAMES, 1, SHIP_FIELD_NAMES.length), shipData);
-			}
-			theOne.mAllShipList.add(new Ship(iD, col, row, player, theOne.mDifficulty, false));
+				switch (theOne.mDifficulty) {
+				case 0:
+					iD = theOne.mEasyShipsDB
+							.createRecord(Arrays.copyOfRange(SHIP_FIELD_NAMES, 1, SHIP_FIELD_NAMES.length), shipData);
+					break;
+				case 1:
+					iD = theOne.mNormShipsDB
+							.createRecord(Arrays.copyOfRange(SHIP_FIELD_NAMES, 1, SHIP_FIELD_NAMES.length), shipData);
+					break;
+				default:
+					iD = theOne.mHardShipsDB
+							.createRecord(Arrays.copyOfRange(SHIP_FIELD_NAMES, 1, SHIP_FIELD_NAMES.length), shipData);
+				}
+				theOne.mAllShipList.add(new Ship(iD, col, row, player, theOne.mDifficulty, false));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		
+
 		return true;
 	}
-	
-	public boolean removeShip(Ship boat){
-		
-		
-		
+
+	public boolean removeShip(Ship boat) {
+
+		switch (mDifficulty) {
+		case 0:
+			mEasyMissilesDB.deleteRecord(String.valueOf(boat.getId()));
+			theOne.mAllShipList.remove(boat);
+			return true;
+
+		case 1:
+			mNormShipsDB.deleteRecord(String.valueOf(boat.getId()));
+			theOne.mAllShipList.remove(boat);
+			return true;
+
+		case 2:
+			mHardShipsDB.deleteRecord(String.valueOf(boat.getId()));
+			theOne.mAllShipList.remove(boat);
+			return true;
+
+		}
+
 		return false;
 	}
-	
-	public boolean addMissile(char col, int row, boolean player, boolean lucky)
-	{
+
+	public boolean addMissile(char col, int row, boolean player, boolean lucky) {
 		String colStr = String.valueOf(col);
 		String rolStr = String.valueOf(row);
-		String playStr = player?"1":"0";
-		String luckStr = lucky?"1":"0";
-		String[] missileData = {colStr, rolStr, playStr, luckStr};
+		String playStr = player ? "1" : "0";
+		String luckStr = lucky ? "1" : "0";
+		String[] missileData = { colStr, rolStr, playStr, luckStr };
 		int iD;
-		try{
-			switch(theOne.mDifficulty)
-			{
+		try {
+			switch (theOne.mDifficulty) {
 			case 0:
-				iD = theOne.mEasyMissilesDB.createRecord(Arrays.copyOfRange(MISSILE_FIELD_NAMES, 1, MISSILE_FIELD_NAMES.length), missileData);
+				iD = theOne.mEasyMissilesDB.createRecord(
+						Arrays.copyOfRange(MISSILE_FIELD_NAMES, 1, MISSILE_FIELD_NAMES.length), missileData);
 				break;
 			case 1:
-				iD = theOne.mNormMissilesDB.createRecord(Arrays.copyOfRange(MISSILE_FIELD_NAMES, 1, MISSILE_FIELD_NAMES.length), missileData);
+				iD = theOne.mNormMissilesDB.createRecord(
+						Arrays.copyOfRange(MISSILE_FIELD_NAMES, 1, MISSILE_FIELD_NAMES.length), missileData);
 				break;
 			default:
-				iD = theOne.mHardMissilesDB.createRecord(Arrays.copyOfRange(MISSILE_FIELD_NAMES, 1, MISSILE_FIELD_NAMES.length), missileData);
+				iD = theOne.mHardMissilesDB.createRecord(
+						Arrays.copyOfRange(MISSILE_FIELD_NAMES, 1, MISSILE_FIELD_NAMES.length), missileData);
 			}
 			theOne.mAllMissileList.add(new Missile(iD, col, row, player, theOne.mDifficulty, lucky));
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return true;

@@ -26,11 +26,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="77.0" text="Play" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#loadMainGameScene" prefHeight="31.0" prefWidth="77.0" text="Play" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
                   <Label text="Ships: " />
-                  <Label prefHeight="21.0" prefWidth="43.0" text="Label" />
+                  <Label fx:id="mNumOfShips" prefHeight="21.0" prefWidth="43.0" text="Label" />
                </children>
             </HBox>
             <GridPane GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">
@@ -46,23 +46,23 @@
             </GridPane>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="76.0" text="Place" />
-                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="76.0" text="Remove" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#PlaceShip" prefHeight="31.0" prefWidth="76.0" text="Place" />
+                  <Button mnemonicParsing="false" onMouseClicked="#remove" prefHeight="31.0" prefWidth="76.0" text="Remove" />
                </children>
             </VBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="145.0" text="Row:" textAlignment="CENTER" />
-                  <ComboBox prefWidth="150.0" />
+                  <ComboBox fx:id="mRolCB" prefWidth="150.0" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="151.0" text="Col:" textAlignment="CENTER" />
-                  <ComboBox prefWidth="150.0" />
+                  <ComboBox fx:id="mColCB" prefWidth="150.0" />
                </children>
             </HBox>
-            <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ListView fx:id="mShips" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>
