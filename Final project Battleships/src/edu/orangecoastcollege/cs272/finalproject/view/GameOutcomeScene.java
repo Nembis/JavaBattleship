@@ -32,6 +32,8 @@ public class GameOutcomeScene implements Initializable {
 			if(miss.isLucky())
 				luckyMissiles++;
 		String name = nameField.getText();
+		if(controller.addScore(name, luckyMissiles, playerMissiles.size()))
+			ViewNavigator.loadScene("Play Again", ViewNavigator.PLAY_AGAIN_SCENE);
 		return this;
 	}
 	
