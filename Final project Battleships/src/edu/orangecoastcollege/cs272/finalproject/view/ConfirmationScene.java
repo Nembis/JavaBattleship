@@ -1,10 +1,11 @@
 package edu.orangecoastcollege.cs272.finalproject.view;
 
 import edu.orangecoastcollege.cs272.finalproject.controller.Controller;
+import javafx.fxml.FXML;
 
 public class ConfirmationScene {
 
-	private Controller controller = Controller.getInstance()
+	private Controller controller = Controller.getInstance();
 	
 	@FXML
 	public Object loadDifficultyScene(){
