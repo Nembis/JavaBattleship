@@ -15,7 +15,7 @@ public class ConfirmationScene {
 	}
 	
 	@FXML
-	public Object startNewGame(){
+	public Object restart(){
 		
 		
 		

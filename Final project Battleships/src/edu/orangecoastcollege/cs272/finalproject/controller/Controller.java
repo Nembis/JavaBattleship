@@ -334,5 +334,16 @@ public class Controller {
 		}
 		return true;
 	}
+	
+	public boolean startNewGame(){
+		
+		switch(mDifficulty){
+		case 1:
+			mEasyShipsDB.deleteAllRecords();
+			mEasyMissilesDB.deleteAllRecords();
+		}
+		
+		return false;
+	}
 
 }
