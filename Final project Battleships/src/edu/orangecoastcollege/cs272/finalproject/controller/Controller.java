@@ -253,7 +253,7 @@ public class Controller {
 		
 		
 		
-		return true;
+		return false;
 	}
 	
 	public boolean addMissile(char col, int row, boolean player, boolean lucky)
