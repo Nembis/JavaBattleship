@@ -249,6 +249,13 @@ public class Controller {
 		return true;
 	}
 	
+	public boolean removeShip(Ship boat){
+		
+		
+		
+		return true;
+	}
+	
 	public boolean addMissile(char col, int row, boolean player, boolean lucky)
 	{
 		String colStr = String.valueOf(col);
