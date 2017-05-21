@@ -17,6 +17,7 @@ public class ViewNavigator {
 	public static final String DIFFICULTY_REVIEW_SCENE = "DifficultyReviewScene.fxml";
 	public static final String WELCOME_SCENE = "WelcomeScene.fxml";
 	public static final String PLAY_AGAIN_SCENE = "PlayAgainScene.fxml";
+	public static final String GAME_SETUP_SCENE = "GameSetupScene.fxml";
 
 	private static Controller controller = Controller.getInstance();
 	public static Stage mainStage;
