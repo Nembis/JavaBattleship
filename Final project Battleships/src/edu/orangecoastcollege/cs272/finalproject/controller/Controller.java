@@ -164,6 +164,18 @@ public class Controller {
 		return ships;
 	}
 
+	public ObservableList<Ship> getShips() {
+		ObservableList<Ship> ship = FXCollections.observableArrayList();
+
+		for (Ship boat : theOne.mAllShipList) {
+			if(boat.getDifficulty() == theOne.mDifficulty)
+				ship.add(boat);
+			
+		}
+
+		return ship;
+	}
+
 	public ObservableList<Missile> getAllMissiles() {
 		return theOne.mAllMissileList;
 	}
@@ -334,15 +346,15 @@ public class Controller {
 		}
 		return true;
 	}
-	
-	public boolean startNewGame(){
-		
-		switch(mDifficulty){
+
+	public boolean startNewGame() {
+
+		switch (mDifficulty) {
 		case 1:
 			mEasyShipsDB.deleteAllRecords();
 			mEasyMissilesDB.deleteAllRecords();
 		}
-		
+
 		return false;
 	}
 
