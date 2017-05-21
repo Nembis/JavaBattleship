@@ -35,6 +35,7 @@ public class Controller {
 	private static final String[] SCORE_FIELD_TYPES = {"INTEGER PRIMARY KEY","TEXT","INTEGER","TEXT","INTEGER"};
 
 	private int mDifficulty;
+	private int mLuckyMissiles;
 	private DBModel mEasyShipsDB;
 	private DBModel mEasyMissilesDB;
 	private DBModel mNormShipsDB;
@@ -188,6 +189,14 @@ public class Controller {
 
 	public void setDifficulty(int difficulty) {
 		mDifficulty = difficulty;
+	}
+
+	public int getLuckyMissiles() {
+		return mLuckyMissiles;
+	}
+
+	public void setLuckyMissiles(int luckyMissiles) {
+		mLuckyMissiles = luckyMissiles;
 	}
 
 	public boolean checkIfGameAlreadyExists(int select) throws SQLException {

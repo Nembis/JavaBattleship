@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="277.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="277.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.orangecoastcollege.cs272.finalproject.view.LuckyMissileMinigameScene">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
   </columnConstraints>
@@ -20,18 +20,18 @@
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="1" />
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="2" />
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="3" />
+            <Button fx:id="choice1Btn" mnemonicParsing="false" onAction="#choice1" prefHeight="50.0" prefWidth="50.0" text="1" />
+            <Button fx:id="choice2Btn" mnemonicParsing="false" onAction="#choice2" prefHeight="50.0" prefWidth="50.0" text="2" />
+            <Button fx:id="choice3Btn" mnemonicParsing="false" onAction="#choice3" prefHeight="50.0" prefWidth="50.0" text="3" />
          </children>
       </HBox>
       <VBox prefHeight="140.0" prefWidth="259.0" spacing="10.0">
          <children>
             <Label text="One of these buttons allow you to get a lucky missile and two other forces you to skip your turn." textAlignment="CENTER" wrapText="true" />
             <Label text="You can either click one of the numbers or continue on with no consequences." textAlignment="CENTER" wrapText="true" />
-            <Label text="You found a Lucky Missile! Press the continue button." textAlignment="CENTER" textFill="RED" wrapText="true" />
+            <Label fx:id="choiceMessage" text="You found a Lucky Missile! Press the continue button." textAlignment="CENTER" textFill="RED" wrapText="true" />
          </children>
       </VBox>
-      <Button alignment="CENTER" mnemonicParsing="false" text="Continue" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <Button alignment="CENTER" mnemonicParsing="false" onAction="#toNextScene" text="Continue" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
    </children>
 </GridPane>
