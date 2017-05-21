@@ -41,6 +41,7 @@ public class GameSetupScene implements Initializable {
 
 		if (place) {
 			mCounterOfShips--;
+			mShips.setAccessibleText(String.valueOf(mCounterOfShips));
 			mShips.setItems(controller.getShips(true));
 		}
 		
@@ -59,6 +60,7 @@ public class GameSetupScene implements Initializable {
 		
 		if(remove){
 			mCounterOfShips++;
+			mShips.setAccessibleText(String.valueOf(mCounterOfShips));
 			mShips.setItems(controller.getShips(true));
 		}
 		
