@@ -248,5 +248,32 @@ public class Controller {
 		
 		return true;
 	}
+	
+	public boolean addMissile(char col, int row, boolean player, boolean lucky)
+	{
+		String colStr = String.valueOf(col);
+		String rolStr = String.valueOf(row);
+		String playStr = player?"1":"0";
+		String luckStr = lucky?"1":"0";
+		String[] missileData = {colStr, rolStr, playStr, luckStr};
+		int iD;
+		try{
+			switch(theOne.mDifficulty)
+			{
+			case 0:
+				iD = theOne.mEasyMissilesDB.createRecord(Arrays.copyOfRange(MISSILE_FIELD_NAMES, 1, MISSILE_FIELD_NAMES.length), missileData);
+				break;
+			case 1:
+				iD = theOne.mNormMissilesDB.createRecord(Arrays.copyOfRange(MISSILE_FIELD_NAMES, 1, MISSILE_FIELD_NAMES.length), missileData);
+				break;
+			default:
+				iD = theOne.mHardMissilesDB.createRecord(Arrays.copyOfRange(MISSILE_FIELD_NAMES, 1, MISSILE_FIELD_NAMES.length), missileData);
+			}
+			theOne.mAllMissileList.add(new Missile(iD, col, row, player, theOne.mDifficulty, lucky));
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return true;
+	}
 
 }

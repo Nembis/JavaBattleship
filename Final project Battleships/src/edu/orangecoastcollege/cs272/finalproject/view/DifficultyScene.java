@@ -9,7 +9,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
 public class DifficultyScene implements Initializable {
@@ -18,9 +17,6 @@ public class DifficultyScene implements Initializable {
 
 	@FXML
 	private ComboBox<String> difficultyCB;
-
-	@FXML
-	private Button difficultyChooseBtn;
 
 	@FXML
 	public Object difficultyClick() {
@@ -40,6 +36,13 @@ public class DifficultyScene implements Initializable {
 		return this;
 	}
 
+	@FXML
+	private Object toHighScore()
+	{
+		ViewNavigator.loadScene("High Scores", ViewNavigator.HIGH_SCORE_SCENE);
+		return this;
+	}
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ObservableList<String> difficulties = FXCollections.observableArrayList();
