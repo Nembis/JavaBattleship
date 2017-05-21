@@ -251,7 +251,8 @@ public class Controller {
 				}
 				theOne.mAllShipList.add(new Ship(iD, col, row, player, theOne.mDifficulty, false));
 			} catch (SQLException e) {
-				return false;
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 
@@ -260,51 +261,25 @@ public class Controller {
 
 	public boolean removeShip(Ship boat) {
 
-		try {
-			switch (mDifficulty) {
-			case 0:
-				mEasyMissilesDB.deleteRecord(String.valueOf(boat.getId()));
-				theOne.mAllShipList.remove(boat);
-				return true;
+		switch (mDifficulty) {
+		case 0:
+			mEasyMissilesDB.deleteRecord(String.valueOf(boat.getId()));
+			theOne.mAllShipList.remove(boat);
+			return true;
 
-			case 1:
-				mNormShipsDB.deleteRecord(String.valueOf(boat.getId()));
-				theOne.mAllShipList.remove(boat);
-				return true;
+		case 1:
+			mNormShipsDB.deleteRecord(String.valueOf(boat.getId()));
+			theOne.mAllShipList.remove(boat);
+			return true;
 
-			case 2:
-				mHardShipsDB.deleteRecord(String.valueOf(boat.getId()));
-				theOne.mAllShipList.remove(boat);
-				return true;
+		case 2:
+			mHardShipsDB.deleteRecord(String.valueOf(boat.getId()));
+			theOne.mAllShipList.remove(boat);
+			return true;
 
-			}
-		} catch (SQLException e) {
-			return false;
 		}
+
 		return false;
-	}
-
-	public boolean addScore(String name, int lucky, int turns) {
-		try {
-			String luckStr = String.valueOf(lucky);
-			String turnStr = String.valueOf(turns);
-			String[] scoreData = { name, turnStr, "", luckStr };
-			switch (theOne.mDifficulty) {
-			case 0:
-				scoreData[2] = "Easy";
-				break;
-			case 1:
-				scoreData[2] = "Normal";
-				break;
-			default:
-				scoreData[2] = "Hard";
-			}
-			theOne.mHighScoreDB.createRecord(Arrays.copyOfRange(SCORE_FIELD_NAMES, 1, SCORE_FIELD_NAMES.length),
-					scoreData);
-		} catch (SQLException e) {
-			return false;
-		}
-		return true;
 	}
 
 	public boolean addMissile(char col, int row, boolean player, boolean lucky) {
