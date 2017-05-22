@@ -380,11 +380,15 @@ public class Controller {
 	}
 	
 	public boolean startNewGame() {
+		
+		ObservableList<Ship> ship = theOne.getShips();
+		
 		try {
 		switch (mDifficulty) {
 		case 0:
 			mEasyShipsDB.deleteAllRecords();
 			mEasyMissilesDB.deleteAllRecords();
+			
 			break;
 		case 1:
 			mNormShipsDB.deleteAllRecords();
@@ -393,10 +397,21 @@ public class Controller {
 		default:
 			mHardShipsDB.deleteAllRecords();
 			mHardMissilesDB.deleteAllRecords();
+			break;
 		}
+		
+		for(Ship boat : ship){
+			theOne.mAllShipList.remove(boat);
+		}
+		
+		return true;
+		
 		} catch (SQLException e) {
 			return false;
 		}
+		
+		
+		
 		return false;
 	}
 

@@ -17,7 +17,9 @@ public class ConfirmationScene {
 	@FXML
 	public Object restart(){
 		
+		controller.startNewGame();
 		
+		ViewNavigator.loadScene("Game Setup Scene", ViewNavigator.GAME_SETUP_SCENE);
 		
 		return this;
 	}
@@ -25,7 +27,7 @@ public class ConfirmationScene {
 	@FXML
 	public Object continueOldGame(){
 		
-		
+		ViewNavigator.loadScene("Main Game Scene", ViewNavigator.MAIN_GAME_SCENE);
 		
 		return this;
 	}
