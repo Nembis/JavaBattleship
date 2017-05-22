@@ -15,7 +15,7 @@ public class Controller {
 
 	private static Controller theOne;
 
-	private static final String DB_NAME = "game_data.db";
+	private static final String DB_NAME = "gameData.db";
 
 	private static final String MISSILE_E_TABLE_NAME = "easy_missiles";
 	private static final String MISSILE_N_TABLE_NAME = "norm_missiles";
@@ -150,6 +150,15 @@ public class Controller {
 		ObservableList<Missile> missiles = FXCollections.observableArrayList();
 		for (Missile rocket : theOne.mAllMissileList) {
 			if (rocket.isPlayer() == player && rocket.getDifficulty() == mDifficulty)
+				missiles.add(rocket);
+		}
+		return missiles;
+	}
+	
+	public ObservableList<Missile> getMissilesLaunched() {
+		ObservableList<Missile> missiles = FXCollections.observableArrayList();
+		for (Missile rocket : theOne.mAllMissileList) {
+			if (rocket.getDifficulty() == mDifficulty)
 				missiles.add(rocket);
 		}
 		return missiles;
@@ -347,14 +356,47 @@ public class Controller {
 		return true;
 	}
 
+	public boolean wreckShip(Ship boat)
+	{
+		if(!boat.isDestroy())
+		{
+			try{
+			String boatID = String.valueOf(boat.getId());
+			String[] boatFields = {"down"};
+			String[] boatValue = {"1"};
+			switch(theOne.mDifficulty){
+			case 0:
+				return theOne.mEasyShipsDB.updateRecord(boatID, boatFields, boatValue);
+			case 1:
+				return theOne.mNormShipsDB.updateRecord(boatID, boatFields, boatValue);	
+			default:
+				return theOne.mHardShipsDB.updateRecord(boatID, boatFields, boatValue);	
+			}
+			}catch(SQLException e){
+				return false;
+			}
+		}
+		return false;
+	}
+	
 	public boolean startNewGame() {
-
+		try {
 		switch (mDifficulty) {
-		case 1:
+		case 0:
 			mEasyShipsDB.deleteAllRecords();
 			mEasyMissilesDB.deleteAllRecords();
+			break;
+		case 1:
+			mNormShipsDB.deleteAllRecords();
+			mNormMissilesDB.deleteAllRecords();
+			break;
+		default:
+			mHardShipsDB.deleteAllRecords();
+			mHardMissilesDB.deleteAllRecords();
 		}
-
+		} catch (SQLException e) {
+			return false;
+		}
 		return false;
 	}
 

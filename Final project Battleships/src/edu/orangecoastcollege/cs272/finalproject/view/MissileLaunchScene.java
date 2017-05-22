@@ -45,6 +45,6 @@ public class MissileLaunchScene implements Initializable{
 		if(launchMessage.getText().equals(""))
 			launchMessage.setText("You fired a missile at "+lastMissile.getAphaCol()+
 					lastMissile.getNumRol()+". It was a miss.");
-		playerBoard = ViewNavigator.generateBoard(true);
+		playerBoard = ViewNavigator.generateBoard(false);
 	}
 }

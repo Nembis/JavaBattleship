@@ -41,8 +41,10 @@ public class Missile extends Battleship {
 
 	@Override
 	public String toString() {
-		return "Missile [mIsLucky=" + mIsLucky + ", mId=" + mId + ", mAphaCol=" + mAphaCol + ", mNumRol=" + mNumRol
-				+ ", mIsPlayer=" + mIsPlayer + "]";
+		if(this.mIsPlayer)
+			return "PLR missile at: "+this.mAphaCol+this.mNumRol;
+		else
+			return "CPU missile at: "+this.mAphaCol+this.mNumRol;
 	}
 
 }

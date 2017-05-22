@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<GridPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+<GridPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.orangecoastcollege.cs272.finalproject.view.HighscoreScene">
    <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="200.0" />
       <RowConstraints minHeight="10.0" prefHeight="75.0" />
@@ -19,14 +18,14 @@
       <ColumnConstraints minWidth="150.0" prefWidth="300.0" />
    </columnConstraints>
    <children>
-      <Button mnemonicParsing="false" text="Back to Game" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+      <Button mnemonicParsing="false" onAction="#backToGame" text="Back to Difficulty Selection" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Easy">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="89.0" prefWidth="300.0">
                      <children>
-                        <ListView layoutX="1.0" layoutY="1.0" prefHeight="170.0" prefWidth="300.0" />
+                        <ListView fx:id="easyScores" layoutX="1.0" layoutY="1.0" prefHeight="170.0" prefWidth="300.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -35,7 +34,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView prefHeight="170.0" prefWidth="300.0" />
+                        <ListView fx:id="normScores" prefHeight="170.0" prefWidth="300.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -44,7 +43,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView prefHeight="170.0" prefWidth="300.0" />
+                        <ListView fx:id="hardScores" prefHeight="170.0" prefWidth="300.0" />
                      </children>
                   </AnchorPane>
               </content>

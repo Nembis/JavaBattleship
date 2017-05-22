@@ -41,10 +41,10 @@ public class Ship extends Battleship {
 
 	@Override
 	public String toString() {
-		return "Ship [mIsDestroy=" + mIsDestroy + ", mId=" + mId + ", mAphaCol=" + mAphaCol + ", mNumRol=" + mNumRol
-				+ ", mIsPlayer=" + mIsPlayer + "]";
+		if(this.mIsPlayer)
+			return "PLR ship at: "+this.mAphaCol+this.mNumRol;
+		else
+			return "CPU ship at: "+this.mAphaCol+this.mNumRol;
 	}
-	
-	
 	
 }

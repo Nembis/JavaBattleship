@@ -4,6 +4,6 @@ import edu.orangecoastcollege.cs272.finalproject.controller.Controller;
 
 public class MainGameScene {
 
-	private Controller controller = Controller.getInstance()
+	private static Controller controller = Controller.getInstance();
 	
 }

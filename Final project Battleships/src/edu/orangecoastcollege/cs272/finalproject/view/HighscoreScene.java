@@ -7,6 +7,7 @@ import edu.orangecoastcollege.cs272.finalproject.controller.Controller;
 import edu.orangecoastcollege.cs272.finalproject.model.HighScore;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 
@@ -14,8 +15,11 @@ public class HighscoreScene implements Initializable{
 
 	private static Controller controller = Controller.getInstance();
 	
+	@FXML
 	private ListView<HighScore> easyScores;
+	@FXML
 	private ListView<HighScore> normScores;
+	@FXML
 	private ListView<HighScore> hardScores;
 	
 	@Override
@@ -32,6 +36,7 @@ public class HighscoreScene implements Initializable{
 		
 	}
 	
+	@FXML
 	public Object backToGame()
 	{
 		ViewNavigator.loadScene("Difficulty Scene", ViewNavigator.DIFFICULTY_SCENE);

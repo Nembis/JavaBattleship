@@ -76,6 +76,7 @@ public class GameSetupScene implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		ObservableList<Character> letters = FXCollections.observableArrayList();
+		/*
 		letters.add('A');
 		letters.add('B');
 		letters.add('C');
@@ -86,6 +87,10 @@ public class GameSetupScene implements Initializable {
 		letters.add('H');
 		letters.add('I');
 		letters.add('j');
+		*/
+		String lettersBase = "ABCDEFGHIJ";
+		for(int c=0;c<lettersBase.length();c++)
+			letters.add(lettersBase.charAt(c));
 
 		mColCB.setItems(letters);
 		mColCB.getSelectionModel().select('A');
