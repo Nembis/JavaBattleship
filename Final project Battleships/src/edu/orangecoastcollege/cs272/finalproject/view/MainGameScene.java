@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 
 public class MainGameScene implements Initializable {
 
@@ -18,7 +19,14 @@ public class MainGameScene implements Initializable {
 	private ComboBox<Character> colCB;
 	@FXML
 	private ComboBox<Integer> rowCB;
-
+	@FXML
+	private Label numOfShips;
+	@FXML
+	private Label numOfLucky;
+	
+	private int shipCount = controller.getLivingShips().size();
+	private int luckyCount = controller.getLuckyMissiles();
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -38,8 +46,16 @@ public class MainGameScene implements Initializable {
 		rowCB.setItems(numbers);
 		rowCB.getSelectionModel().select(1);
 		
+		numOfShips.setText(String.valueOf(shipCount));
+		numOfLucky.setText(String.valueOf(luckyCount));
 		
-
+	}
+	
+	@FXML
+	public Object loadDifficultyScene(){
+		ViewNavigator.loadScene("Difficulty Scene", ViewNavigator.DIFFICULTY_SCENE);
+		
+		return this;
 	}
 
 }

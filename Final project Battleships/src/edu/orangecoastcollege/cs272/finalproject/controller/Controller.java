@@ -329,7 +329,21 @@ public class Controller {
 		return true;
 	}
 
+	public boolean isValideMissileLaunch(char col, int row, boolean player) {
+
+		for (Missile rocket : theOne.mAllMissileList) {
+			if (rocket.getAphaCol() == col && rocket.getNumRol() == row && rocket.getDifficulty() == theOne.mDifficulty
+					&& rocket.isPlayer() == player)
+				return false;
+		}
+
+		return true;
+	}
+
 	public boolean addMissile(char col, int row, boolean player, boolean lucky) {
+		if(theOne.isValideMissileLaunch(col, row, player))
+			return false;
+		
 		String colStr = String.valueOf(col);
 		String rolStr = String.valueOf(row);
 		String playStr = player ? "1" : "0";
@@ -437,7 +451,7 @@ public class Controller {
 		ObservableList<Ship> ship = theOne.getShips();
 
 		try {
-			switch (mDifficulty) {
+			switch (theOne.mDifficulty) {
 			case 0:
 				mEasyShipsDB.deleteAllRecords();
 				mEasyMissilesDB.deleteAllRecords();
@@ -462,6 +476,18 @@ public class Controller {
 		} catch (SQLException e) {
 			return false;
 		}
+
+	}
+
+	public ObservableList<Ship> getLivingShips() {
+		ObservableList<Ship> living = FXCollections.observableArrayList();
+
+		for (Ship boat : theOne.mAllShipList) {
+			if (theOne.wreckShip(boat))
+				living.add(boat);
+		}
+
+		return living;
 
 	}
 
