@@ -19,9 +19,9 @@ public class GameSetupScene implements Initializable {
 	private static Controller controller = Controller.getInstance();
 
 	@FXML
-	private ComboBox<Character> mColCB;
+	private ComboBox<Character> colCB;
 	@FXML
-	private ComboBox<Integer> mRolCB;
+	private ComboBox<Integer> rowCB;
 	@FXML
 	private Label mNumOfShips;
 	@FXML
@@ -36,8 +36,8 @@ public class GameSetupScene implements Initializable {
 	@FXML
 	public Object PlaceShip() {
 
-		boolean place = controller.addShip(mColCB.getSelectionModel().getSelectedItem(),
-				mRolCB.getSelectionModel().getSelectedIndex(), true);
+		boolean place = controller.addShip(colCB.getSelectionModel().getSelectedItem(),
+				rowCB.getSelectionModel().getSelectedIndex(), true);
 
 		if (place) {
 			mCounterOfShips--;
@@ -76,31 +76,20 @@ public class GameSetupScene implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		ObservableList<Character> letters = FXCollections.observableArrayList();
-		/*
-		letters.add('A');
-		letters.add('B');
-		letters.add('C');
-		letters.add('D');
-		letters.add('E');
-		letters.add('F');
-		letters.add('G');
-		letters.add('H');
-		letters.add('I');
-		letters.add('j');
-		*/
+		
 		String lettersBase = "ABCDEFGHIJ";
-		for(int c=0;c<lettersBase.length();c++)
+		for(int c = 0; c < lettersBase.length(); c++)
 			letters.add(lettersBase.charAt(c));
 
-		mColCB.setItems(letters);
-		mColCB.getSelectionModel().select('A');
+		colCB.setItems(letters);
+		colCB.getSelectionModel().select('A');
 
 		ObservableList<Integer> numbers = FXCollections.observableArrayList();
 		for (int i = 1; i < 11; i++) {
 			numbers.add(i);
 		}
-		mRolCB.setItems(numbers);
-		mRolCB.getSelectionModel().select(1);
+		rowCB.setItems(numbers);
+		rowCB.getSelectionModel().select(1);
 
 		mNumOfShips.setText("10");
 		

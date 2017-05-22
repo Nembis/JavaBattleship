@@ -50,16 +50,16 @@
                   <Button mnemonicParsing="false" onMouseClicked="#remove" prefHeight="31.0" prefWidth="76.0" text="Remove" />
                </children>
             </VBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="145.0" text="Row:" textAlignment="CENTER" />
-                  <ComboBox fx:id="mRolCB" prefWidth="150.0" />
-               </children>
-            </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="145.0" text="Row:" textAlignment="CENTER" />
+                  <ComboBox fx:id="rowCB" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="151.0" text="Col:" textAlignment="CENTER" />
-                  <ComboBox fx:id="mColCB" prefWidth="150.0" />
+                  <ComboBox fx:id="colCB" prefWidth="150.0" />
                </children>
             </HBox>
             <ListView fx:id="mShips" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
