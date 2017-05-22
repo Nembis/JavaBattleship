@@ -3,6 +3,7 @@ package edu.orangecoastcollege.cs272.finalproject.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import edu.orangecoastcollege.cs272.finalproject.model.DBModel;
 import edu.orangecoastcollege.cs272.finalproject.model.HighScore;
@@ -154,7 +155,7 @@ public class Controller {
 		}
 		return missiles;
 	}
-	
+
 	public ObservableList<Missile> getMissilesLaunched() {
 		ObservableList<Missile> missiles = FXCollections.observableArrayList();
 		for (Missile rocket : theOne.mAllMissileList) {
@@ -177,9 +178,9 @@ public class Controller {
 		ObservableList<Ship> ship = FXCollections.observableArrayList();
 
 		for (Ship boat : theOne.mAllShipList) {
-			if(boat.getDifficulty() == theOne.mDifficulty)
+			if (boat.getDifficulty() == theOne.mDifficulty)
 				ship.add(boat);
-			
+
 		}
 
 		return ship;
@@ -356,60 +357,112 @@ public class Controller {
 		return true;
 	}
 
-	public boolean wreckShip(Ship boat)
-	{
-		if(!boat.isDestroy())
-		{
-			try{
-			String boatID = String.valueOf(boat.getId());
-			String[] boatFields = {"down"};
-			String[] boatValue = {"1"};
-			switch(theOne.mDifficulty){
-			case 0:
-				return theOne.mEasyShipsDB.updateRecord(boatID, boatFields, boatValue);
-			case 1:
-				return theOne.mNormShipsDB.updateRecord(boatID, boatFields, boatValue);	
-			default:
-				return theOne.mHardShipsDB.updateRecord(boatID, boatFields, boatValue);	
-			}
-			}catch(SQLException e){
+	public boolean wreckShip(Ship boat) {
+		if (!boat.isDestroy()) {
+			try {
+				String boatID = String.valueOf(boat.getId());
+				String[] boatFields = { "down" };
+				String[] boatValue = { "1" };
+				switch (theOne.mDifficulty) {
+				case 0:
+					return theOne.mEasyShipsDB.updateRecord(boatID, boatFields, boatValue);
+				case 1:
+					return theOne.mNormShipsDB.updateRecord(boatID, boatFields, boatValue);
+				default:
+					return theOne.mHardShipsDB.updateRecord(boatID, boatFields, boatValue);
+				}
+			} catch (SQLException e) {
 				return false;
 			}
 		}
-		return false;
+		return true;
 	}
-	
-	public boolean startNewGame() {
-		
-		ObservableList<Ship> ship = theOne.getShips();
-		
-		try {
-		switch (mDifficulty) {
+
+	public boolean shipMove(Ship boat) {
+		ObservableList<Ship> allyBoats = theOne.getShips(boat.isPlayer());
+		int choice;
+		int row = boat.getNumRol();
+		int col = boat.getAphaCol();
+		Random rNG = new Random();
+		boolean[] obstructing = { boat.getNumRol() == 1, boat.getNumRol() == 10, boat.getAphaCol() == 'A',
+				boat.getAphaCol() == 'J' };
+		for (Ship ally : allyBoats) {
+			if (ally.getAphaCol() == boat.getAphaCol() && ally.getNumRol() == boat.getNumRol() + 1)
+				obstructing[1] = true;
+			else if (ally.getAphaCol() == boat.getAphaCol() && ally.getNumRol() == boat.getNumRol() - 1)
+				obstructing[0] = true;
+			else if (ally.getAphaCol() == boat.getAphaCol() + 1 && ally.getNumRol() == boat.getNumRol())
+				obstructing[3] = true;
+			else if (ally.getAphaCol() == boat.getAphaCol() - 1 && ally.getNumRol() == boat.getNumRol())
+				obstructing[2] = true;
+		}
+		if (obstructing[0] && obstructing[1] && obstructing[2] && obstructing[3])
+			return false;
+		do {
+			choice = rNG.nextInt(4);
+		} while (obstructing[choice]);
+
+		switch (choice) {
 		case 0:
-			mEasyShipsDB.deleteAllRecords();
-			mEasyMissilesDB.deleteAllRecords();
-			
+			row--;
 			break;
 		case 1:
-			mNormShipsDB.deleteAllRecords();
-			mNormMissilesDB.deleteAllRecords();
+			row++;
 			break;
-		default:
-			mHardShipsDB.deleteAllRecords();
-			mHardMissilesDB.deleteAllRecords();
+		case 2:
+			col--;
+			break;
+		case 3:
+			col++;
 			break;
 		}
-		
-		for(Ship boat : ship){
-			theOne.mAllShipList.remove(boat);
-		}
-		
-		return true;
-		
+		String[] boatFields = { "col", "row" };
+		String[] boatValues = { String.valueOf(Character.toChars(col)), String.valueOf(row) };
+		try {
+			switch (theOne.mDifficulty) {
+			case 0:
+				return theOne.mEasyShipsDB.updateRecord(String.valueOf(boat.getId()), boatFields, boatValues);
+			case 1:
+				return theOne.mNormShipsDB.updateRecord(String.valueOf(boat.getId()), boatFields, boatValues);
+			default:
+				return theOne.mHardShipsDB.updateRecord(String.valueOf(boat.getId()), boatFields, boatValues);
+			}
 		} catch (SQLException e) {
 			return false;
 		}
-		
+	}
+
+	public boolean startNewGame() {
+
+		ObservableList<Ship> ship = theOne.getShips();
+
+		try {
+			switch (mDifficulty) {
+			case 0:
+				mEasyShipsDB.deleteAllRecords();
+				mEasyMissilesDB.deleteAllRecords();
+
+				break;
+			case 1:
+				mNormShipsDB.deleteAllRecords();
+				mNormMissilesDB.deleteAllRecords();
+				break;
+			default:
+				mHardShipsDB.deleteAllRecords();
+				mHardMissilesDB.deleteAllRecords();
+				break;
+			}
+
+			for (Ship boat : ship) {
+				theOne.mAllShipList.remove(boat);
+			}
+
+			return true;
+
+		} catch (SQLException e) {
+			return false;
+		}
+
 	}
 
 }
