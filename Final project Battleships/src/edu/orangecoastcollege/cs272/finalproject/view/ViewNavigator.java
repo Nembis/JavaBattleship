@@ -47,10 +47,10 @@ public class ViewNavigator {
 	public static ImageView generateSquare(boolean player, int col, int row) {
 		ObservableList<Ship> ships = controller.getShips(player);
 		for (Ship boat : ships) {
-			if (boat.getNumRol()-1 == row && Character.getNumericValue(boat.getAphaCol())-Character.getNumericValue('A') == col) {
+			if (boat.getNumRol()-1 == row && (Character.getNumericValue(boat.getAphaCol())-Character.getNumericValue('A')) == col) {
 				if (boat.isDestroy())
 					return new ImageView(new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\BurningSquare.png")));
-				else if (boat.isPlayer() && player)
+				else //if (boat.isPlayer() && player)
 					return new ImageView(new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\ShipSquare.png")));
 			}
 		}

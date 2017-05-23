@@ -20,22 +20,11 @@ public class DifficultyScene implements Initializable {
 
 	@FXML
 	public Object difficultyClick() {
-		
-		try {
-			controller.setDifficulty(difficultyCB.getSelectionModel().getSelectedIndex());
-			if (controller.checkIfGameAlreadyExists(difficultyCB.getSelectionModel().getSelectedIndex()))
-				ViewNavigator.loadScene("Confirmation Scene", ViewNavigator.CONFIRMATION_SCENE);
-			else
-				ViewNavigator.loadScene("", ViewNavigator.DIFFICULTY_REVIEW_SCENE);
-			return this;
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		
-
+		controller.setDifficulty(difficultyCB.getSelectionModel().getSelectedIndex());
+		if (controller.checkIfGameAlreadyExists())
+			ViewNavigator.loadScene("Confirmation Scene", ViewNavigator.CONFIRMATION_SCENE);
+		else
+			ViewNavigator.loadScene("", ViewNavigator.DIFFICULTY_REVIEW_SCENE);
 		return this;
 	}
 

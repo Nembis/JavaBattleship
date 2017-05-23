@@ -29,7 +29,7 @@ public class ConfirmationScene {
 		
 		if(controller.getShips(false).size() < 10)
 			ViewNavigator.loadScene("Game Setup Scene", ViewNavigator.GAME_SETUP_SCENE);
-		else if(controller.getShips(true).size() > controller.getShips(false).size())
+		else if(controller.getMissilesLaunched(true).size() > controller.getMissilesLaunched(false).size())
 			ViewNavigator.loadScene("AI's Turn", ViewNavigator.AI_CHOICE_SCENE);
 		else
 			ViewNavigator.loadScene("Main Game Scene", ViewNavigator.MAIN_GAME_SCENE);

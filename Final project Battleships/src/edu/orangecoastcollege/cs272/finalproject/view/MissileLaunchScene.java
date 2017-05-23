@@ -75,6 +75,7 @@ public class MissileLaunchScene implements Initializable{
 		
 		if(luckyMissile)
 		{
+			controller.setLuckyMissiles(controller.getLuckyMissiles()-1);
 			aiActive = aIActiveShips();
 			Random rNG = new Random();
 			int extraMissiles = rNG.nextInt(3)+1;

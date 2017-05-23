@@ -69,7 +69,7 @@ public class Controller {
 					char col = rs.get(1).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean lucky = rs.get(4).equals("1");
-					theOne.mAllMissileList.add(new Missile(id, col, row, player, 1, lucky));
+					theOne.mAllMissileList.add(new Missile(id, col, row, player, 0, lucky));
 				}
 
 				theOne.mNormMissilesDB = new DBModel(DB_NAME, MISSILE_N_TABLE_NAME, MISSILE_FIELD_NAMES,
@@ -81,7 +81,7 @@ public class Controller {
 					char col = rs.get(1).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean lucky = rs.get(4).equals("1");
-					theOne.mAllMissileList.add(new Missile(id, col, row, player, 2, lucky));
+					theOne.mAllMissileList.add(new Missile(id, col, row, player, 1, lucky));
 				}
 
 				theOne.mHardMissilesDB = new DBModel(DB_NAME, MISSILE_H_TABLE_NAME, MISSILE_FIELD_NAMES,
@@ -93,7 +93,7 @@ public class Controller {
 					char col = rs.get(1).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean lucky = rs.get(4).equals("1");
-					theOne.mAllMissileList.add(new Missile(id, col, row, player, 3, lucky));
+					theOne.mAllMissileList.add(new Missile(id, col, row, player, 2, lucky));
 				}
 
 				theOne.mEasyShipsDB = new DBModel(DB_NAME, SHIP_E_TABLE_NAME, SHIP_FIELD_NAMES, SHIP_FIELD_TYPES);
@@ -104,7 +104,7 @@ public class Controller {
 					char col = rs.get(1).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean down = rs.get(4).equals("1");
-					theOne.mAllShipList.add(new Ship(id, col, row, player, 1, down));
+					theOne.mAllShipList.add(new Ship(id, col, row, player, 0, down));
 				}
 
 				theOne.mNormShipsDB = new DBModel(DB_NAME, SHIP_N_TABLE_NAME, SHIP_FIELD_NAMES, SHIP_FIELD_TYPES);
@@ -115,7 +115,7 @@ public class Controller {
 					char col = rs.get(1).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean down = rs.get(4).equals("1");
-					theOne.mAllShipList.add(new Ship(id, col, row, player, 2, down));
+					theOne.mAllShipList.add(new Ship(id, col, row, player, 1, down));
 				}
 
 				theOne.mHardShipsDB = new DBModel(DB_NAME, SHIP_H_TABLE_NAME, SHIP_FIELD_NAMES, SHIP_FIELD_TYPES);
@@ -126,7 +126,7 @@ public class Controller {
 					char col = rs.get(1).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean down = rs.get(4).equals("1");
-					theOne.mAllShipList.add(new Ship(id, col, row, player, 3, down));
+					theOne.mAllShipList.add(new Ship(id, col, row, player, 2, down));
 				}
 
 				theOne.mHighScoreDB = new DBModel(DB_NAME, SCORE_TABLE_NAME, SCORE_FIELD_NAMES, SCORE_FIELD_TYPES);
@@ -218,9 +218,10 @@ public class Controller {
 		theOne.mLuckyMissiles = luckyMissiles;
 	}
 
-	public boolean checkIfGameAlreadyExists(int select) throws SQLException {
+	public boolean checkIfGameAlreadyExists() {
 
-		switch (select) {
+		try {
+		switch (theOne.mDifficulty) {
 		case 0:
 			if (theOne.mEasyShipsDB.getRecordCount() > 0)
 				return true;
@@ -232,8 +233,10 @@ public class Controller {
 		case 2:
 			if (theOne.mHardShipsDB.getRecordCount() > 0)
 				return true;
-
 		default:
+			return false;
+		}
+		} catch (SQLException e) {
 			return false;
 		}
 	}
@@ -392,7 +395,7 @@ public class Controller {
 				return false;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	public boolean shipMove(Ship boat) {
@@ -452,7 +455,8 @@ public class Controller {
 	public boolean startNewGame() {
 
 		ObservableList<Ship> ship = theOne.getShips();
-
+		ObservableList<Missile> miss = theOne.getMissilesLaunched();
+		
 		try {
 			switch (theOne.mDifficulty) {
 			case 0:
@@ -473,6 +477,8 @@ public class Controller {
 			for (Ship boat : ship) {
 				theOne.mAllShipList.remove(boat);
 			}
+			for(Missile m: miss)
+				theOne.mAllMissileList.remove(m);
 
 			return true;
 

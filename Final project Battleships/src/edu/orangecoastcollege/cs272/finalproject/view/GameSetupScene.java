@@ -37,7 +37,7 @@ public class GameSetupScene implements Initializable {
 	@FXML
 	private GridPane mBoard;
 
-	private int mCounterOfShips = 10;
+	private int mCounterOfShips = 10 - controller.getShips(true).size();
 
 	@FXML
 	public Object placeShip() {
@@ -109,15 +109,13 @@ public class GameSetupScene implements Initializable {
 		
 		mShips.setItems(controller.getShips(true));
 
-
 		mNumOfShips.setText("10");
-
 
 		mNumOfShips.setText(String.valueOf(10 - controller.getShips(true).size()));
 		
-
-		mPlayBtn.setDisable(true);
-		mRemoveBtn.setDisable(true);
+		mPlayBtn.setDisable(mCounterOfShips != 0);
+		mPlaceBtn.setDisable(mCounterOfShips == 0);
+		mRemoveBtn.setDisable(mCounterOfShips == 10);
 
 		
 		for(int x=0;x<10;x++)
@@ -128,6 +126,7 @@ public class GameSetupScene implements Initializable {
 	@FXML
 	public Object loadMainGameScene(){
 		
+		String colAlpha = "ABCDEFGHIJ";
 		Random rNG = new Random();
 		int x=0,y=0;
 		for(int s=0;s<10;s++)
@@ -136,7 +135,7 @@ public class GameSetupScene implements Initializable {
 				x = rNG.nextInt(10);
 				y = rNG.nextInt(10);
 			}while(!controller.validShipPlacement(Character.toChars(Character.getNumericValue('A')+x)[0], y+1, false));
-			controller.addShip(Character.toChars(Character.getNumericValue('A')+x)[0], y+1, false);
+			controller.addShip(colAlpha.charAt(x), y+1, false);
 		}
 		
 		ViewNavigator.loadScene("Main Game Scene", ViewNavigator.MAIN_GAME_SCENE);
