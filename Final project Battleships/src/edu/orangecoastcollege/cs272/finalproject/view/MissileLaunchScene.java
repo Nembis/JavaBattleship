@@ -44,12 +44,14 @@ public class MissileLaunchScene implements Initializable{
 
 	private int[] selectInRange(int origX, int origY, int outRad, Random rNG)
 	{
+		String colAlpha = "ABCDEFGHIJ";
 		int[] rangeDiff = {0,0};
 		do{
 			rangeDiff[0] = rNG.nextInt(2*outRad+1)-outRad;
 			rangeDiff[1] = rNG.nextInt(2*outRad+1)-outRad;
 		}while(origX+rangeDiff[0] >=0 && origX+rangeDiff[0] <10 &&
-				origY+rangeDiff[1] >=0 && origY+rangeDiff[1] <10);
+				origY+rangeDiff[1] >=0 && origY+rangeDiff[1] <10 &&
+				!controller.isValideMissileLaunch(colAlpha.charAt(origX+rangeDiff[0]), origY+rangeDiff[1]+1, true));
 		return rangeDiff;
 	}
 	

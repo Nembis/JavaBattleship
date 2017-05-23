@@ -32,7 +32,7 @@ public class AIChoiceScene implements Initializable {
 			rangeDiff[1] = rNGMissile.nextInt(2 * outRad + 1) - outRad;
 		} while (origX + rangeDiff[0] >= 0 && origX + rangeDiff[0] < 10 && origY + rangeDiff[1] >= 0
 				&& origY + rangeDiff[1] < 10 && 
-				(controller.isValideMissileLaunch((char)(Character.getNumericValue('A')+origX + rangeDiff[0]), origY + rangeDiff[1]+1, false)));
+				(!controller.isValideMissileLaunch((char)(Character.getNumericValue('A')+origX + rangeDiff[0]), origY + rangeDiff[1]+1, false)));
 		return rangeDiff;
 	}
 
