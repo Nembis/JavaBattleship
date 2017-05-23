@@ -1,7 +1,6 @@
 package edu.orangecoastcollege.cs272.finalproject.view;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import edu.orangecoastcollege.cs272.finalproject.controller.Controller;
