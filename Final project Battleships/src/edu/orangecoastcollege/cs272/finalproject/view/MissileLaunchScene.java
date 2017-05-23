@@ -95,6 +95,8 @@ public class MissileLaunchScene implements Initializable{
 			for(int m=0;m<extraMissiles;m++)
 			{
 				int[] location = selectInRange(lastMissile.getAphaCol()-'A', lastMissile.getNumRol()-1, 1, rNG);
+				controller.addMissile((char)(Character.getNumericValue(lastMissile.getAphaCol())+location[0])
+						, lastMissile.getNumRol()+location[1], true, false, false);
 				for(Ship boat: aiActive)
 				{
 					if(boat.getAphaCol() == (char)(Character.getNumericValue(lastMissile.getAphaCol())+location[0]) &&

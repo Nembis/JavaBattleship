@@ -98,7 +98,7 @@ public class MainGameScene implements Initializable {
 	public Object launch() {
 
 		if (controller.addMissile(colCB.getSelectionModel().getSelectedItem().charValue(), rowCB.getSelectionModel().getSelectedItem().intValue(),
-				true, useLuck.isSelected()))
+				true, useLuck.isSelected(),true))
 			ViewNavigator.loadScene("Missle Launch Scene", ViewNavigator.MISSILE_LAUNCH_SCENE);
 
 		return this;

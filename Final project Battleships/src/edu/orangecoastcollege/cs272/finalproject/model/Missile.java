@@ -6,6 +6,7 @@ package edu.orangecoastcollege.cs272.finalproject.model;
 public class Missile extends Battleship {
 
 	private boolean mIsLucky;
+	private boolean mIsMove;
 
 	/**
 	 * this is the constructor that creates a new missile.
@@ -16,9 +17,10 @@ public class Missile extends Battleship {
 	 * @param difficulty
 	 * @param isLucky
 	 */
-	public Missile(int id, char aphaCol, int numRol, boolean isPlayer, int difficulty, boolean isLucky) {
+	public Missile(int id, char aphaCol, int numRol, boolean isPlayer, int difficulty, boolean isLucky, boolean isMove) {
 		super(id, aphaCol, numRol, isPlayer, difficulty);
 		mIsLucky = isLucky;
+		mIsMove = isMove;
 	}
 
 	/**
@@ -35,6 +37,22 @@ public class Missile extends Battleship {
 	 */
 	public void setIsLucky(boolean isLucky) {
 		mIsLucky = isLucky;
+	}
+	
+	/**
+	 * Checks if missile is player or lucky spawned
+	 * @return
+	 */
+	public boolean isIsMove() {
+		return mIsMove;
+	}
+
+	/**
+	 * Changes if missile is player or lucky spawned
+	 * @return
+	 */
+	public void setIsMove(boolean isMove) {
+		mIsMove = isMove;
 	}
 
 	/**

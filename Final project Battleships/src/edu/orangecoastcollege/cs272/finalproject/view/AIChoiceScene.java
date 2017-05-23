@@ -31,7 +31,8 @@ public class AIChoiceScene implements Initializable {
 			rangeDiff[0] = rNGMissile.nextInt(2 * outRad + 1) - outRad;
 			rangeDiff[1] = rNGMissile.nextInt(2 * outRad + 1) - outRad;
 		} while (origX + rangeDiff[0] >= 0 && origX + rangeDiff[0] < 10 && origY + rangeDiff[1] >= 0
-				&& origY + rangeDiff[1] < 10);
+				&& origY + rangeDiff[1] < 10 && 
+				(controller.isValideMissileLaunch((char)(Character.getNumericValue('A')+origX + rangeDiff[0]), origY + rangeDiff[1]+1, false)));
 		return rangeDiff;
 	}
 
@@ -75,7 +76,7 @@ public class AIChoiceScene implements Initializable {
 		}
 
 		String colAlpha = "ABCDEFGHIJ";
-		controller.addMissile(colAlpha.charAt(colChoice), rowChoice + 1, false, fireLucky);
+		controller.addMissile(colAlpha.charAt(colChoice), rowChoice + 1, false, fireLucky, true);
 		ObservableList<Ship> playerShips = playerActiveShips();
 		boolean targetHit = false;
 		for (Ship boat : playerShips)
@@ -89,6 +90,7 @@ public class AIChoiceScene implements Initializable {
 			int hit = 0;
 			for (int t = 0; t < extraMissiles; t++) {
 				int[] otherTarget = selectInRange(colChoice, rowChoice, 1);
+				controller.addMissile(colAlpha.charAt(otherTarget[0]+colChoice), otherTarget[1]+rowChoice+1, false, false, true);
 				for (Ship boat : playerShips)
 					if (boat.getAphaCol() == colAlpha.charAt(otherTarget[0]) && boat.getNumRol() == otherTarget[1]) {
 						controller.wreckShip(boat);

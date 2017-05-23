@@ -2,6 +2,7 @@ package edu.orangecoastcollege.cs272.finalproject.view;
 
 import java.io.IOException;
 import edu.orangecoastcollege.cs272.finalproject.controller.Controller;
+import edu.orangecoastcollege.cs272.finalproject.model.Missile;
 import edu.orangecoastcollege.cs272.finalproject.model.Ship;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -72,10 +73,15 @@ public class ViewNavigator {
 			if (boat.getNumRol()-1 == row && (Character.getNumericValue(boat.getAphaCol())-Character.getNumericValue('A')) == col) {
 				if (boat.isDestroy())
 					return new ImageView(new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\BurningSquare.png")));
-				else //if (boat.isPlayer() && player)
+				else if(player)
 					return new ImageView(new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\ShipSquare.png")));
 			}
 		}
+		ObservableList<Missile> missiles = controller.getMissilesLaunched(!player);
+		for(Missile m: missiles)
+			if (m.getNumRol()-1 == row && (Character.getNumericValue(m.getAphaCol())-Character.getNumericValue('A')) == col) {
+				return new ImageView(new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\MarkedSquare.png")));
+			}
 		return new ImageView(new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\EmptySquare.png")));
 	}
 }

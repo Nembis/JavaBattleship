@@ -21,9 +21,9 @@ public class Controller {
 	private static final String MISSILE_E_TABLE_NAME = "easy_missiles";
 	private static final String MISSILE_N_TABLE_NAME = "norm_missiles";
 	private static final String MISSILE_H_TABLE_NAME = "hard_missiles";
-	private static final String[] MISSILE_FIELD_NAMES = { "id", "col", "row", "player_owned", "lucky" };
+	private static final String[] MISSILE_FIELD_NAMES = { "id", "col", "row", "player_owned", "lucky", "move" };
 	private static final String[] MISSILE_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "INTEGER", "INTEGER",
-			"INTEGER" };
+			"INTEGER", "INTEGER" };
 
 	private static final String SHIP_E_TABLE_NAME = "easy_ships";
 	private static final String SHIP_N_TABLE_NAME = "norm_ships";
@@ -74,7 +74,8 @@ public class Controller {
 					char col = rs.get(1).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean lucky = rs.get(4).equals("1");
-					theOne.mAllMissileList.add(new Missile(id, col, row, player, 0, lucky));
+					boolean move = rs.get(5).equals("1");
+					theOne.mAllMissileList.add(new Missile(id, col, row, player, 0, lucky, move));
 				}
 
 				theOne.mNormMissilesDB = new DBModel(DB_NAME, MISSILE_N_TABLE_NAME, MISSILE_FIELD_NAMES,
@@ -86,7 +87,8 @@ public class Controller {
 					char col = rs.get(1).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean lucky = rs.get(4).equals("1");
-					theOne.mAllMissileList.add(new Missile(id, col, row, player, 1, lucky));
+					boolean move = rs.get(5).equals("1");
+					theOne.mAllMissileList.add(new Missile(id, col, row, player, 0, lucky, move));
 				}
 
 				theOne.mHardMissilesDB = new DBModel(DB_NAME, MISSILE_H_TABLE_NAME, MISSILE_FIELD_NAMES,
@@ -98,7 +100,8 @@ public class Controller {
 					char col = rs.get(1).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean lucky = rs.get(4).equals("1");
-					theOne.mAllMissileList.add(new Missile(id, col, row, player, 2, lucky));
+					boolean move = rs.get(5).equals("1");
+					theOne.mAllMissileList.add(new Missile(id, col, row, player, 0, lucky, move));
 				}
 
 				theOne.mEasyShipsDB = new DBModel(DB_NAME, SHIP_E_TABLE_NAME, SHIP_FIELD_NAMES, SHIP_FIELD_TYPES);
@@ -139,9 +142,9 @@ public class Controller {
 				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
 					String name = rs.get(1);
-					int turns = Integer.parseInt(rs.get(1));
-					String diff = rs.get(2);
-					int lucks = Integer.parseInt(rs.get(3));
+					int turns = Integer.parseInt(rs.get(2));
+					String diff = rs.get(3);
+					int lucks = Integer.parseInt(rs.get(4));
 					theOne.mScoreList.add(new HighScore(id, name, diff, turns, lucks));
 				}
 
@@ -237,7 +240,7 @@ public class Controller {
 	 */
 	public ObservableList<HighScore> getScores(String difficulty) {
 		ObservableList<HighScore> scores = FXCollections.observableArrayList();
-		for (HighScore hs : scores) {
+		for (HighScore hs : theOne.mScoreList) {
 			if (hs.getDifficulty().equals(difficulty))
 				scores.add(hs);
 		}
@@ -418,8 +421,9 @@ public class Controller {
 			default:
 				scoreData[2] = "Hard";
 			}
-			theOne.mHighScoreDB.createRecord(Arrays.copyOfRange(SCORE_FIELD_NAMES, 1, SCORE_FIELD_NAMES.length),
+			int iD = theOne.mHighScoreDB.createRecord(Arrays.copyOfRange(SCORE_FIELD_NAMES, 1, SCORE_FIELD_NAMES.length),
 					scoreData);
+			theOne.mScoreList.add(new HighScore(iD, name, scoreData[2], turns, lucky));
 		} catch (SQLException e) {
 			return false;
 		}
@@ -453,7 +457,7 @@ public class Controller {
 	 * @param lucky
 	 * @return
 	 */
-	public boolean addMissile(char col, int row, boolean player, boolean lucky) {
+	public boolean addMissile(char col, int row, boolean player, boolean lucky, boolean move) {
 		if(!theOne.isValideMissileLaunch(col, row, player))
 			return false;
 		
@@ -461,7 +465,8 @@ public class Controller {
 		String rolStr = String.valueOf(row);
 		String playStr = player ? "1" : "0";
 		String luckStr = lucky ? "1" : "0";
-		String[] missileData = { colStr, rolStr, playStr, luckStr };
+		String moveStr = move ? "1" : "0";
+		String[] missileData = { colStr, rolStr, playStr, luckStr, moveStr };
 		int iD;
 		try {
 			switch (theOne.mDifficulty) {
@@ -477,7 +482,7 @@ public class Controller {
 				iD = theOne.mHardMissilesDB.createRecord(
 						Arrays.copyOfRange(MISSILE_FIELD_NAMES, 1, MISSILE_FIELD_NAMES.length), missileData);
 			}
-			theOne.mAllMissileList.add(new Missile(iD, col, row, player, theOne.mDifficulty, lucky));
+			theOne.mAllMissileList.add(new Missile(iD, col, row, player, theOne.mDifficulty, lucky, move));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -627,4 +632,20 @@ public class Controller {
 
 	}
 
+	/**
+	 * Clears high scores
+	 * @return
+	 */
+	public boolean clearScores()
+	{
+		try {
+			theOne.mHighScoreDB.deleteAllRecords();
+		ObservableList<HighScore> exScore = FXCollections.observableArrayList(theOne.mScoreList);
+		for(HighScore s: exScore)
+			theOne.mScoreList.remove(s);
+		return true;
+		} catch (SQLException e) {
+			return false;
+		}
+	}
 }

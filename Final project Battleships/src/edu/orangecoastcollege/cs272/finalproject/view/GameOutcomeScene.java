@@ -25,16 +25,17 @@ public class GameOutcomeScene implements Initializable {
 	private static Controller controller = Controller.getInstance();
 	
 	@FXML
-	public static Label outcomeLabel;
+	public Label outcomeLabel;
 	@FXML
-	public static TextField nameField;
+	public TextField nameField;
 	@FXML
-	public static Button submitScoreBtn;
+	public Button submitScoreBtn;
 	
 	/**
 	 * This method creates teh new score and adds it into the observablelist and the data base.
 	 * @return
 	 */
+	@FXML
 	public Object submitScore()
 	{
 		ObservableList<Missile> playerMissiles = controller.getMissilesLaunched(true);
@@ -44,7 +45,17 @@ public class GameOutcomeScene implements Initializable {
 				luckyMissiles++;
 		String name = nameField.getText();
 		if(controller.addScore(name, luckyMissiles, playerMissiles.size()))
+		{
+			controller.startNewGame();
 			ViewNavigator.loadScene("Play Again", ViewNavigator.PLAY_AGAIN_SCENE);
+		}
+		return this;
+	}
+	@FXML
+	public Object doNotSubmit()
+	{
+		controller.startNewGame();
+		ViewNavigator.loadScene("Play Again", ViewNavigator.PLAY_AGAIN_SCENE);
 		return this;
 	}
 	
@@ -58,12 +69,15 @@ public class GameOutcomeScene implements Initializable {
 		{
 			outcomeLabel.setText("VICTORY!");
 			outcomeLabel.setTextFill(Color.DARKGREEN);
+			nameField.setDisable(false);
+			submitScoreBtn.setDisable(false);
 		}
 		else
 		{
 			outcomeLabel.setText("DEFEAT!");
 			outcomeLabel.setTextFill(Color.DARKRED);
 			nameField.setDisable(true);
+			submitScoreBtn.setDisable(true);
 		}
 		
 	}
