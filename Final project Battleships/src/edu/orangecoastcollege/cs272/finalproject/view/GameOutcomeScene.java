@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 import edu.orangecoastcollege.cs272.finalproject.controller.Controller;
 import edu.orangecoastcollege.cs272.finalproject.model.Missile;
-import edu.orangecoastcollege.cs272.finalproject.model.Ship;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

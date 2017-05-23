@@ -1,6 +1,7 @@
 package edu.orangecoastcollege.cs272.finalproject.view;
 
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import edu.orangecoastcollege.cs272.finalproject.controller.Controller;
@@ -39,7 +40,7 @@ public class GameSetupScene implements Initializable {
 	private int mCounterOfShips = 10;
 
 	@FXML
-	public Object PlaceShip() {
+	public Object placeShip() {
 
 		boolean place = controller.addShip(colCB.getSelectionModel().getSelectedItem(),
 				rowCB.getSelectionModel().getSelectedItem(), true);
@@ -95,7 +96,7 @@ public class GameSetupScene implements Initializable {
 			letters.add(lettersBase.charAt(c));
 
 		colCB.setItems(letters);
-		colCB.getSelectionModel().select(0);;
+		colCB.getSelectionModel().select(0);
 
 		ObservableList<Integer> numbers = FXCollections.observableArrayList();
 		for (int i = 1; i < 11; i++) {
@@ -103,8 +104,10 @@ public class GameSetupScene implements Initializable {
 		}
 		rowCB.setItems(numbers);
 		rowCB.getSelectionModel().select(0);
+		
+		mShips.setItems(controller.getShips(true));
 
-		mNumOfShips.setText("10");
+		mNumOfShips.setText(String.valueOf(10 - controller.getShips(true).size()));
 		
 		mPlayBtn.setDisable(true);
 		mRemoveBtn.setDisable(true);
@@ -116,6 +119,17 @@ public class GameSetupScene implements Initializable {
 	
 	@FXML
 	public Object loadMainGameScene(){
+		
+		Random rNG = new Random();
+		int x=0,y=0;
+		for(int s=0;s<10;s++)
+		{
+			do{
+				x = rNG.nextInt(10);
+				y = rNG.nextInt(10);
+			}while(!controller.validShipPlacement(Character.toChars(Character.getNumericValue('A')+x)[0], y+1, false));
+			controller.addShip(Character.toChars(Character.getNumericValue('A')+x)[0], y+1, false);
+		}
 		
 		ViewNavigator.loadScene("Main Game Scene", ViewNavigator.MAIN_GAME_SCENE);
 		

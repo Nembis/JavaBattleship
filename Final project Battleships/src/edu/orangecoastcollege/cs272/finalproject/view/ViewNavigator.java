@@ -1,6 +1,5 @@
 package edu.orangecoastcollege.cs272.finalproject.view;
 
-import java.io.File;
 import java.io.IOException;
 import edu.orangecoastcollege.cs272.finalproject.controller.Controller;
 import edu.orangecoastcollege.cs272.finalproject.model.Ship;

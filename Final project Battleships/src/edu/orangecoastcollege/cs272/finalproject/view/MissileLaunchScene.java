@@ -26,7 +26,10 @@ public class MissileLaunchScene implements Initializable{
 	@FXML
 	public Object continueGame()
 	{
-		ViewNavigator.loadScene("AI's Turn", ViewNavigator.AI_CHOICE_SCENE);
+		if(controller.getShips(false).size() == 0)
+			ViewNavigator.loadScene("You Won", ViewNavigator.GAME_OUTCOME_SCENE);
+		else
+			ViewNavigator.loadScene("AI's Turn", ViewNavigator.AI_CHOICE_SCENE);
 		return this;
 	}
 

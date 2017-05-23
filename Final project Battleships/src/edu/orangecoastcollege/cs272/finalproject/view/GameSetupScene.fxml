@@ -26,7 +26,7 @@
           <RowConstraints maxHeight="191.0" minHeight="10.0" prefHeight="133.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="mPlayBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#loadMainGameScene" prefHeight="31.0" prefWidth="77.0" text="Play" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <Button fx:id="mPlayBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loadMainGameScene" prefHeight="31.0" prefWidth="77.0" text="Play" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
                   <Label text="Ships: " />
@@ -61,8 +61,8 @@
             </GridPane>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="mPlaceBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#PlaceShip" prefHeight="31.0" prefWidth="76.0" text="Place" />
-                  <Button fx:id="mRemoveBtn" mnemonicParsing="false" onMouseClicked="#remove" prefHeight="31.0" prefWidth="76.0" text="Remove" />
+                  <Button fx:id="mPlaceBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#placeShip" prefHeight="31.0" prefWidth="76.0" text="Place" />
+                  <Button fx:id="mRemoveBtn" mnemonicParsing="false" onAction="#remove" prefHeight="31.0" prefWidth="76.0" text="Remove" />
                </children>
             </VBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">

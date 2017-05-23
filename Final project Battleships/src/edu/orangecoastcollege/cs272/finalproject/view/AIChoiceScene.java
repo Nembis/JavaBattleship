@@ -51,7 +51,9 @@ public class AIChoiceScene implements Initializable {
 	@FXML
 	public Object toNextScene()
 	{
-		if(controller.getMissilesLaunched(true).size()%2 == 0)
+		if(controller.getShips(true).size() == 0)
+			ViewNavigator.loadScene("You Lost", ViewNavigator.GAME_OUTCOME_SCENE);
+		else if(controller.getMissilesLaunched(true).size()%2 == 0)
 			ViewNavigator.loadScene("Lucky Missiles", ViewNavigator.LUCKY_MISSILE_MINIGAME_SCENE);
 		else
 			ViewNavigator.loadScene("Main Game Scene", ViewNavigator.MAIN_GAME_SCENE);

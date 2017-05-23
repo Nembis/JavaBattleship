@@ -239,10 +239,10 @@ public class Controller {
 		}
 	}
 
-	public boolean validShipPlacement(char col, int rol) {
+	public boolean validShipPlacement(char col, int rol, boolean player) {
 
 		for (Ship boat : theOne.mAllShipList) {
-			if (col == boat.getAphaCol() && rol == boat.getNumRol() && theOne.mDifficulty == boat.getDifficulty())
+			if (col == boat.getAphaCol() && rol == boat.getNumRol() && theOne.mDifficulty == boat.getDifficulty() && boat.isPlayer() == player)
 				return false;
 		}
 
@@ -251,7 +251,7 @@ public class Controller {
 
 	public boolean addShip(char col, int row, boolean player) {
 
-		if (theOne.validShipPlacement(col, row)) {
+		if (theOne.validShipPlacement(col, row, player)) {
 			String colStr = String.valueOf(col);
 			String rolStr = String.valueOf(row);
 			String playStr = player ? "1" : "0";
@@ -479,10 +479,10 @@ public class Controller {
 
 	}
 
-	public ObservableList<Ship> getLivingShips() {
+	public ObservableList<Ship> getLivingShips(boolean player) {
 		ObservableList<Ship> living = FXCollections.observableArrayList();
 
-		for (Ship boat : theOne.mAllShipList) {
+		for (Ship boat : theOne.getShips(player)) {
 			if (theOne.wreckShip(boat))
 				living.add(boat);
 		}
