@@ -53,6 +53,6 @@ public class DifficultyScene implements Initializable {
 		difficulties.add("Normal");
 		difficulties.add("Hard");
 		difficultyCB.setItems(difficulties);
-		difficultyCB.getSelectionModel().select("Easy");
+		difficultyCB.getSelectionModel().select(0);
 	}
 }

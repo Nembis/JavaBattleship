@@ -51,8 +51,10 @@ public class ViewNavigator {
 			if (boat.getNumRol()-1 == row && Character.getNumericValue(boat.getAphaCol())-Character.getNumericValue('A') == col) {
 				if (boat.isDestroy())
 					image = new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\BurningSquare.png"));
-				else if (player)
+				else if (boat.isPlayer() && player)
 					image = new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\ShipSquare.png"));
+				else
+					image = new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\EmptySquare.png"));
 			}
 		}
 		return new ImageView(image);

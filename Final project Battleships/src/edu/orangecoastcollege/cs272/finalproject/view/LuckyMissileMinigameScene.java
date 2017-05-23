@@ -13,17 +13,17 @@ import javafx.scene.control.Label;
 public class LuckyMissileMinigameScene implements Initializable {
 
 	private static Controller controller = Controller.getInstance();
-	private static Random rNGMissile = new Random();
+	private Random rNGMissile = new Random();
 	@FXML
-	private static Button choice1Btn;
+	private Button choice1Btn;
 	@FXML
-	private static Button choice2Btn;
+	private Button choice2Btn;
 	@FXML
-	private static Button choice3Btn;
+	private Button choice3Btn;
 	@FXML
-	private static Label choiceMessage;
-	private static int choice = -1;
-	private static int correctChoice = rNGMissile.nextInt(3);
+	private Label choiceMessage;
+	private int choice = -1;
+	private int correctChoice = rNGMissile.nextInt(3);
 	
 	@FXML
 	public Object choice1()
@@ -47,11 +47,12 @@ public class LuckyMissileMinigameScene implements Initializable {
 		return this;
 	}
 
-	public static void choiceCheck()
+	public void choiceCheck()
 	{
 		choice1Btn.setDisable(true);
 		choice2Btn.setDisable(true);
 		choice3Btn.setDisable(true);
+		choiceMessage.setVisible(true);
 		if(choice == correctChoice)
 		{
 			choiceMessage.setText("You found a Lucky Missile! Press the continue button.");

@@ -16,14 +16,12 @@ import javafx.scene.layout.GridPane;
 public class AIChoiceScene implements Initializable {
 
 	private static Controller controller = Controller.getInstance();
-	private static int rowChoice;
-	private static int colChoice;
 	private static Random rNGMissile = new Random();
 	private static boolean fireLucky = controller.getDifficulty() != 0 && rNGMissile.nextBoolean();
 	private boolean moveShip = controller.getDifficulty() ==2 && rNGMissile.nextBoolean();
 	
 	@FXML
-	private static Label choiceMessage;
+	private Label choiceMessage;
 	@FXML
 	private GridPane playerBoard;
 	
@@ -60,15 +58,16 @@ public class AIChoiceScene implements Initializable {
 		return this;
 	}
 	
-	private static void missileFire()
+	private void missileFire()
 	{
+		int rowChoice, colChoice;
 		if(controller.getDifficulty() != 2)
 		{
 		do{
 			rowChoice = rNGMissile.nextInt(10);
 			colChoice = rNGMissile.nextInt(10);
 		}while(rowChoice >=0 && rowChoice <10 && colChoice >=0 && colChoice <10 &&
-				controller.isValideMissileLaunch((char)(colChoice+'A'), rowChoice+1, false));
+				!controller.isValideMissileLaunch((char)(colChoice+'A'), rowChoice+1, false));
 		}
 		else
 		{
@@ -78,6 +77,7 @@ public class AIChoiceScene implements Initializable {
 			rowChoice = targetedLocation[0];
 			colChoice = targetedLocation[1];
 		}
+		
 		String colAlpha = "ABCDEFGHIJ";
 		controller.addMissile(colAlpha.charAt(colChoice), rowChoice+1, false, fireLucky);
 		ObservableList<Ship> playerShips = playerActiveShips();
@@ -111,12 +111,12 @@ public class AIChoiceScene implements Initializable {
 		}
 		else
 		{
-			choiceMessage.setText("The AI fired a missile at "+colAlpha.charAt(colChoice)+
+			choiceMessage.setText("The AI fired a missile at "+String.valueOf(colAlpha.charAt(colChoice))+
 					String.valueOf(rowChoice+1)+". It was a "+(targetHit?"hit":"miss")+".");
 		}
 	}
 	
-	private static boolean movingShip()
+	private boolean movingShip()
 	{
 		ObservableList<Ship> aIShip = controller.getShips(false);
 		ObservableList<Ship> aIActive = FXCollections.observableArrayList();

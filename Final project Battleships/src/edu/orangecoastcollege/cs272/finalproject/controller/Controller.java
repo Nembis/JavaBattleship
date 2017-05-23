@@ -150,7 +150,7 @@ public class Controller {
 	public ObservableList<Missile> getMissilesLaunched(boolean player) {
 		ObservableList<Missile> missiles = FXCollections.observableArrayList();
 		for (Missile rocket : theOne.mAllMissileList) {
-			if (rocket.isPlayer() == player && rocket.getDifficulty() == mDifficulty)
+			if (rocket.isPlayer() == player && rocket.getDifficulty() == theOne.mDifficulty)
 				missiles.add(rocket);
 		}
 		return missiles;
@@ -159,7 +159,7 @@ public class Controller {
 	public ObservableList<Missile> getMissilesLaunched() {
 		ObservableList<Missile> missiles = FXCollections.observableArrayList();
 		for (Missile rocket : theOne.mAllMissileList) {
-			if (rocket.getDifficulty() == mDifficulty)
+			if (rocket.getDifficulty() == theOne.mDifficulty)
 				missiles.add(rocket);
 		}
 		return missiles;
@@ -168,7 +168,7 @@ public class Controller {
 	public ObservableList<Ship> getShips(boolean player) {
 		ObservableList<Ship> ships = FXCollections.observableArrayList();
 		for (Ship boat : theOne.mAllShipList) {
-			if (boat.isPlayer() == player && boat.getDifficulty() == mDifficulty)
+			if (boat.isPlayer() == player && boat.getDifficulty() == theOne.mDifficulty)
 				ships.add(boat);
 		}
 		return ships;
@@ -204,19 +204,19 @@ public class Controller {
 	}
 
 	public int getDifficulty() {
-		return mDifficulty;
+		return theOne.mDifficulty;
 	}
 
 	public void setDifficulty(int difficulty) {
-		mDifficulty = difficulty;
+		theOne.mDifficulty = difficulty;
 	}
 
 	public int getLuckyMissiles() {
-		return mLuckyMissiles;
+		return theOne.mLuckyMissiles;
 	}
 
 	public void setLuckyMissiles(int luckyMissiles) {
-		mLuckyMissiles = luckyMissiles;
+		theOne.mLuckyMissiles = luckyMissiles;
 	}
 
 	public boolean checkIfGameAlreadyExists(int select) throws SQLException {

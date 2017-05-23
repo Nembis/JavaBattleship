@@ -103,6 +103,6 @@ public class MissileLaunchScene implements Initializable{
 		}
 		for(int x=0;x<10;x++)
 			for(int y=0;y<10;y++)
-				playerBoard.add(ViewNavigator.generateSquare(true, x, y), x, y);
+				playerBoard.add(ViewNavigator.generateSquare(false, x, y), x, y);
 	}
 }
