@@ -93,10 +93,10 @@ public class MissileLaunchScene implements Initializable{
 						break;
 					}
 				}
-				launchMessage.setText("You fired a lucky missile at "+lastMissile.getAphaCol()+
-						lastMissile.getNumRol()+". "+String.valueOf(extraMissiles)+" more missiles launched with "+
-						String.valueOf(hit)+" of them as hits.");
 			}
+			launchMessage.setText("You fired a lucky missile at "+lastMissile.getAphaCol()+
+					lastMissile.getNumRol()+". "+String.valueOf(extraMissiles)+" more missiles launched with "+
+					String.valueOf(hit)+" of them as hits.");
 		}
 		else
 		{
