@@ -1,22 +1,45 @@
 package edu.orangecoastcollege.cs272.finalproject.model;
 
+/**
+ * This class creates a new Missile.
+ */
 public class Missile extends Battleship {
 
 	private boolean mIsLucky;
 
+	/**
+	 * this is the constructor that creates a new missile.
+	 * @param id
+	 * @param aphaCol
+	 * @param numRol
+	 * @param isPlayer
+	 * @param difficulty
+	 * @param isLucky
+	 */
 	public Missile(int id, char aphaCol, int numRol, boolean isPlayer, int difficulty, boolean isLucky) {
 		super(id, aphaCol, numRol, isPlayer, difficulty);
 		mIsLucky = isLucky;
 	}
 
+	/**
+	 * This method says if the missle is a lucky missile.
+	 * @return
+	 */
 	public boolean isLucky() {
 		return mIsLucky;
 	}
 
+	/**
+	 * This mehtod sets' teh lucky missile.
+	 * @param isLucky
+	 */
 	public void setIsLucky(boolean isLucky) {
 		mIsLucky = isLucky;
 	}
 
+	/**
+	 * This creates a object a new id.
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -25,6 +48,9 @@ public class Missile extends Battleship {
 		return result;
 	}
 
+	/**
+	 * This method takes two missiles to see if thear the same.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -39,6 +65,9 @@ public class Missile extends Battleship {
 		return true;
 	}
 
+	/**
+	 * This prints out the missile data.
+	 */
 	@Override
 	public String toString() {
 		if(this.mIsPlayer)

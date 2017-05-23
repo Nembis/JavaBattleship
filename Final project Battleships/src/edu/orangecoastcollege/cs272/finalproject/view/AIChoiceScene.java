@@ -44,6 +44,10 @@ public class AIChoiceScene implements Initializable {
 		return filtered;
 	}
 
+	/**
+	 * This loads teh next scene which is the main game scene.
+	 * @return
+	 */
 	@FXML
 	public Object toNextScene() {
 		if (controller.getShips(true).size() == 0)
@@ -121,6 +125,9 @@ public class AIChoiceScene implements Initializable {
 		return shipMoved;
 	}
 
+	/**
+	 * This method set's up the scene before anything happens.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		boolean moveError = false;

@@ -11,6 +11,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 
+/**
+ * This class loads and capter the score.
+ * @author Dat Doan
+ *
+ */
 public class HighscoreScene implements Initializable{
 
 	private static Controller controller = Controller.getInstance();
@@ -22,6 +27,9 @@ public class HighscoreScene implements Initializable{
 	@FXML
 	private ListView<HighScore> hardScores;
 	
+	/**
+	 * this mehtod loads all thei highscores befor ethe scene is loaded.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ObservableList<HighScore> eScores = controller.getScores("Easy");
@@ -36,6 +44,10 @@ public class HighscoreScene implements Initializable{
 		
 	}
 	
+	/**
+	 * This method loads loads teh game scene again.
+	 * @return
+	 */
 	@FXML
 	public Object backToGame()
 	{

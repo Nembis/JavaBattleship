@@ -3,6 +3,11 @@ package edu.orangecoastcollege.cs272.finalproject.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+/**
+ * This mehtod asks if you want to play the game again or do you want to close down the prgogram.
+ * @author Dat Doan
+ *
+ */
 public class PlayAgainScene {
 	
 	@FXML
@@ -10,6 +15,10 @@ public class PlayAgainScene {
 	@FXML
 	private Button closeBtn;
 	
+	/**
+	 * This method loads the difficulty scene again.
+	 * @return
+	 */
 	@FXML
 	public Object playAgainClick()
 	{
@@ -18,6 +27,10 @@ public class PlayAgainScene {
 		return this;
 	}
 	
+	/**
+	 * this method close the program if the player doesn't want to play gain.
+	 * @return
+	 */
 	@FXML
 	public Object closeClick()
 	{

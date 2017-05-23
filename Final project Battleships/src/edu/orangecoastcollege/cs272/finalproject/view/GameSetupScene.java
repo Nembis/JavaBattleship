@@ -16,6 +16,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 
+/**
+ * This class let's you setup where your ships will be.
+ * @author Dominic Mai
+ *
+ */
 public class GameSetupScene implements Initializable {
 
 	private static Controller controller = Controller.getInstance();
@@ -39,6 +44,10 @@ public class GameSetupScene implements Initializable {
 
 	private int mCounterOfShips = 10 - controller.getShips(true).size();
 
+	/**
+	 * This method place the ship if it is possible.
+	 * @return
+	 */
 	@FXML
 	public Object placeShip() {
 
@@ -63,6 +72,10 @@ public class GameSetupScene implements Initializable {
 		return this;
 	}
 
+	/**
+	 * This mehtod removes a ship of your choose.
+	 * @return
+	 */
 	@FXML
 	public Object remove() {
 
@@ -87,6 +100,9 @@ public class GameSetupScene implements Initializable {
 		return this;
 	}
 
+	/**
+	 * This method loads everything before hand.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -123,6 +139,10 @@ public class GameSetupScene implements Initializable {
 				mBoard.add(ViewNavigator.generateSquare(true, x, y), x, y);
 	}
 
+	/**
+	 * This method loads the man game scene after all the ships are placed.
+	 * @return
+	 */
 	@FXML
 	public Object loadMainGameScene(){
 		

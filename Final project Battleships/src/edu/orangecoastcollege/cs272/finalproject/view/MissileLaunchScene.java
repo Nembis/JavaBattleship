@@ -14,6 +14,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
+/**
+ * This class shows where your missile hit.
+ * @author Dat Doan
+ *
+ */
 public class MissileLaunchScene implements Initializable{
 	
 	private static Controller controller = Controller.getInstance();
@@ -23,6 +28,10 @@ public class MissileLaunchScene implements Initializable{
 	@FXML
 	private Label launchMessage;
 	
+	/**
+	 * This mehod continues the game when you are done seeing wher you hit.
+	 * @return
+	 */
 	@FXML
 	public Object continueGame()
 	{
@@ -54,6 +63,9 @@ public class MissileLaunchScene implements Initializable{
 		return active;
 	}
 	
+	/**
+	 * This method loads in the data before the scene oads up.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		launchMessage.setText("");

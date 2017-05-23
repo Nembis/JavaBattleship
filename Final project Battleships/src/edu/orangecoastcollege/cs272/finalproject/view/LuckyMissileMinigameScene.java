@@ -10,6 +10,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+/**
+ * This class loads the lucky missile mini game Scene
+ * The lucky missile mini game scene allows you to win a missile that hits more then one place.
+ * @author Dat Doan
+ *
+ */
 public class LuckyMissileMinigameScene implements Initializable {
 
 	private static Controller controller = Controller.getInstance();
@@ -25,6 +31,10 @@ public class LuckyMissileMinigameScene implements Initializable {
 	private int choice = -1;
 	private int correctChoice = rNGMissile.nextInt(3);
 	
+	/**
+	 * This method finds out which box the player choose and see if they win or not a lucky missile.
+	 * @return
+	 */
 	@FXML
 	public Object choice1()
 	{
@@ -32,6 +42,11 @@ public class LuckyMissileMinigameScene implements Initializable {
 		choiceCheck();
 		return this;
 	}
+	
+	/**
+	 * This is choose 2.
+	 * @return
+	 */
 	@FXML
 	public Object choice2()
 	{
@@ -39,6 +54,11 @@ public class LuckyMissileMinigameScene implements Initializable {
 		choiceCheck();
 		return this;
 	}
+	
+	/**
+	 * this is choose 3.
+	 * @return
+	 */
 	@FXML
 	public Object choice3()
 	{
@@ -47,6 +67,9 @@ public class LuckyMissileMinigameScene implements Initializable {
 		return this;
 	}
 
+	/**
+	 * This method checks the choose.
+	 */
 	public void choiceCheck()
 	{
 		choice1Btn.setDisable(true);
@@ -62,6 +85,10 @@ public class LuckyMissileMinigameScene implements Initializable {
 			choiceMessage.setText("You found nothing. Press the continue button.");
 	}
 	
+	/**
+	 * this loads the next scene which is hte main game scene.
+	 * @return
+	 */
 	@FXML
 	public Object toNextScene()
 	{
@@ -69,6 +96,9 @@ public class LuckyMissileMinigameScene implements Initializable {
 		return this;
 	}
 	
+	/**
+	 * This method loads the data before hte scene.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		choiceMessage.setVisible(false);

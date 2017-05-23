@@ -15,6 +15,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 
+/**
+ * This is the main game Scene.
+ * You can choose where to attack and see where you ship is.
+ * @author Dominic Mai
+ *
+ */
 public class MainGameScene implements Initializable {
 
 	private static Controller controller = Controller.getInstance();
@@ -37,6 +43,9 @@ public class MainGameScene implements Initializable {
 	private int shipCount = controller.getLivingShips(true).size();
 	private int luckyCount = controller.getLuckyMissiles();
 
+	/**
+	 * This method loads in all the data befor ethe scene shows up.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -70,6 +79,10 @@ public class MainGameScene implements Initializable {
 			}
 	}
 
+	/**
+	 * this loads the difficulty Scene.
+	 * @return
+	 */
 	@FXML
 	public Object loadDifficultyScene() {
 		ViewNavigator.loadScene("Difficulty Scene", ViewNavigator.DIFFICULTY_SCENE);
@@ -77,6 +90,10 @@ public class MainGameScene implements Initializable {
 		return this;
 	}
 
+	/**
+	 * This mehtod launches a missile.
+	 * @return
+	 */
 	@FXML
 	public Object launch() {
 

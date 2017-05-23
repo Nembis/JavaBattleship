@@ -8,6 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
+/**
+ * THis class loads a scene that reviews what is in that one difficulty level.
+ * @author Dominic Mai
+ *
+ */
 public class DifficultyReviewScene implements Initializable{
 
 	private int mDifficulty = Controller.getInstance().getDifficulty();
@@ -19,6 +24,10 @@ public class DifficultyReviewScene implements Initializable{
 	@FXML
 	private Label aIMoveShip;
 	
+	/**
+	 * This method loads the DifficultyScene.
+	 * @return
+	 */
 	@FXML
 	public Object loadDifficultyScene() {
 		
@@ -27,6 +36,10 @@ public class DifficultyReviewScene implements Initializable{
 		return this;
 	}
 	
+	/**
+	 * This mehtod loads up the  gameSetupScene.
+	 * @return
+	 */
 	@FXML
 	public Object loadSetupScene() {
 		
@@ -35,6 +48,9 @@ public class DifficultyReviewScene implements Initializable{
 		return this;
 	}
 
+	/**
+	 * This method sets up the scene before anything else ahppens.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if(mDifficulty == 0)

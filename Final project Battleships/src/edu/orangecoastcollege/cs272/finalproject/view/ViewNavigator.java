@@ -10,7 +10,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+/**
+ * This class helsp moves scene to scene easier.
+ */
 public class ViewNavigator {
+	/**
+	 * These are staic methods that helps the view navigator to load in a scene.
+	 */
 	public static final String DIFFICULTY_SCENE = "DifficultyScene.fxml";
 	public static final String CONFIRMATION_SCENE = "ConfirmationScene.fxml";
 	public static final String DIFFICULTY_REVIEW_SCENE = "DifficultyReviewScene.fxml";
@@ -27,10 +33,19 @@ public class ViewNavigator {
 	private static Controller controller = Controller.getInstance();
 	public static Stage mainStage;
 
+	/**
+	 * This method set's teh stage.
+	 * @param stage
+	 */
 	public static void setStage(Stage stage) {
 		mainStage = stage;
 	}
 
+	/**
+	 * This method loads all teh scenes.
+	 * @param title
+	 * @param sceneFXML
+	 */
 	public static void loadScene(String title, String sceneFXML) {
 
 		try {
@@ -44,6 +59,13 @@ public class ViewNavigator {
 		}
 	}
 
+	/**
+	 * this method loads in the image of the water and the shps.
+	 * @param player
+	 * @param col
+	 * @param row
+	 * @return
+	 */
 	public static ImageView generateSquare(boolean player, int col, int row) {
 		ObservableList<Ship> ships = controller.getShips(player);
 		for (Ship boat : ships) {

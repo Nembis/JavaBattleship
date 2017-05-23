@@ -13,9 +13,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
+/**
+ * This class loads how the game went. 
+ * If you lost it will tell you that you lsot and also hwo many turns it took for youto lose or win.
+ * 
+ * @author Dat Doan
+ *
+ */
 public class GameOutcomeScene implements Initializable {
 
 	private static Controller controller = Controller.getInstance();
+	
 	@FXML
 	public static Label outcomeLabel;
 	@FXML
@@ -23,6 +31,10 @@ public class GameOutcomeScene implements Initializable {
 	@FXML
 	public static Button submitScoreBtn;
 	
+	/**
+	 * This method creates teh new score and adds it into the observablelist and the data base.
+	 * @return
+	 */
 	public Object submitScore()
 	{
 		ObservableList<Missile> playerMissiles = controller.getMissilesLaunched(true);
@@ -36,6 +48,9 @@ public class GameOutcomeScene implements Initializable {
 		return this;
 	}
 	
+	/**
+	 * This mehtod loads up the scene before hand.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		

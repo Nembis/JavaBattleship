@@ -52,6 +52,11 @@ public class Controller {
 	private Controller() {
 	}
 
+	/**
+	 * This methods get's the 
+	 * This also creates a new DB if there is not one.
+	 * @return
+	 */
 	public static Controller getInstance() {
 		if (theOne == null) {
 			theOne = new Controller();
@@ -147,6 +152,13 @@ public class Controller {
 		return theOne;
 	}
 
+	/**
+	 * This method get all the Missile Launched. 
+	 * This method Finds the playerrs missile Launched
+	 * There is a overLoad method.
+	 * @param player
+	 * @return
+	 */
 	public ObservableList<Missile> getMissilesLaunched(boolean player) {
 		ObservableList<Missile> missiles = FXCollections.observableArrayList();
 		for (Missile rocket : theOne.mAllMissileList) {
@@ -156,6 +168,12 @@ public class Controller {
 		return missiles;
 	}
 
+	/**
+	 * This method get's all the missile launched
+	 * This one is an overloaded method and it doesn't take in a arg.
+	 * It will return every missile from both the player and the AI in the same difficulty.
+	 * @return
+	 */
 	public ObservableList<Missile> getMissilesLaunched() {
 		ObservableList<Missile> missiles = FXCollections.observableArrayList();
 		for (Missile rocket : theOne.mAllMissileList) {
@@ -165,6 +183,12 @@ public class Controller {
 		return missiles;
 	}
 
+	/**
+	 * This method get's the ships of the Player in a difficulty.
+	 * There is an overloaded method of this.
+	 * @param player
+	 * @return
+	 */
 	public ObservableList<Ship> getShips(boolean player) {
 		ObservableList<Ship> ships = FXCollections.observableArrayList();
 		for (Ship boat : theOne.mAllShipList) {
@@ -174,6 +198,11 @@ public class Controller {
 		return ships;
 	}
 
+	/**
+	 * This method get's all the ships from both teh AI and the player based on the Difficulty.
+	 * This is hte overload method 
+	 * @return
+	 */
 	public ObservableList<Ship> getShips() {
 		ObservableList<Ship> ship = FXCollections.observableArrayList();
 
@@ -185,14 +214,27 @@ public class Controller {
 		return ship;
 	}
 
+	/**
+	 * This method returns the all Missiles observable list.
+	 * @return
+	 */
 	public ObservableList<Missile> getAllMissiles() {
 		return theOne.mAllMissileList;
 	}
 
+	/**
+	 * This method returns all teh ships as an observable List.
+	 * @return
+	 */
 	public ObservableList<Ship> getAllShips() {
 		return theOne.mAllShipList;
 	}
 
+	/**
+	 * This returns the highest scores for all three for a difficulty.
+	 * @param difficulty
+	 * @return
+	 */
 	public ObservableList<HighScore> getScores(String difficulty) {
 		ObservableList<HighScore> scores = FXCollections.observableArrayList();
 		for (HighScore hs : scores) {
@@ -202,22 +244,44 @@ public class Controller {
 		return scores;
 	}
 
+	/**
+	 * This return the current difficulty.
+	 * @return
+	 */
 	public int getDifficulty() {
 		return theOne.mDifficulty;
 	}
 
+	/**
+	 * This will set the difficutly to another level.
+	 * @param difficulty
+	 */
 	public void setDifficulty(int difficulty) {
 		theOne.mDifficulty = difficulty;
 	}
 
+	/**
+	 * This returns the lucky Missile.
+	 * @return
+	 */
 	public int getLuckyMissiles() {
 		return theOne.mLuckyMissiles;
 	}
 
+	/**
+	 * This sets how many lucky missiles a player has.
+	 * @param luckyMissiles
+	 */
 	public void setLuckyMissiles(int luckyMissiles) {
 		theOne.mLuckyMissiles = luckyMissiles;
 	}
 
+	/**
+	 * This mehtod links up with the ConfirmationScnee.java and it willl check if there is already a game in progress.
+	 * retursn a boolean.
+	 * true means it already exisits false means there isn't a game.
+	 * @return
+	 */
 	public boolean checkIfGameAlreadyExists() {
 
 		try {
@@ -241,6 +305,14 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * This will call the checkIfGameAlreadyExists method and checks if it is a valid place.
+	 * If that method returns true then there will be a ship added into the DB and into the ObservableList.
+	 * @param col
+	 * @param rol
+	 * @param player
+	 * @return
+	 */
 	public boolean validShipPlacement(char col, int rol, boolean player) {
 
 		for (Ship boat : theOne.mAllShipList) {
@@ -251,6 +323,13 @@ public class Controller {
 		return true;
 	}
 
+	/**
+	 * This adds a ship into the data Base.
+	 * @param col
+	 * @param row
+	 * @param player
+	 * @return
+	 */
 	public boolean addShip(char col, int row, boolean player) {
 
 		if (theOne.validShipPlacement(col, row, player)) {
@@ -285,6 +364,12 @@ public class Controller {
 		
 	}
 
+	/**
+	 * This method is for hard mode for the game. 
+	 * This method allows eht ai in hard mode. 
+	 * @param boat
+	 * @return
+	 */
 	public boolean removeShip(Ship boat) {
 
 		try {
@@ -311,6 +396,13 @@ public class Controller {
 		return false;
 	}
 
+	/**
+	 * This method adds your score to the end when you finish the game.
+	 * @param name
+	 * @param lucky
+	 * @param turns
+	 * @return
+	 */
 	public boolean addScore(String name, int lucky, int turns) {
 		try {
 			String luckStr = String.valueOf(lucky);
@@ -334,6 +426,14 @@ public class Controller {
 		return true;
 	}
 
+	/**
+	 * This checks if the place that the play wants to launch their missile is valid.
+	 * if that place is valid then it will return a boolean.
+	 * @param col
+	 * @param row
+	 * @param player
+	 * @return
+	 */
 	public boolean isValideMissileLaunch(char col, int row, boolean player) {
 
 		for (Missile rocket : theOne.mAllMissileList) {
@@ -345,6 +445,14 @@ public class Controller {
 		return true;
 	}
 
+	/**
+	 * This addes a missile into the data base and the observable list.
+	 * @param col
+	 * @param row
+	 * @param player
+	 * @param lucky
+	 * @return
+	 */
 	public boolean addMissile(char col, int row, boolean player, boolean lucky) {
 		if(!theOne.isValideMissileLaunch(col, row, player))
 			return false;
@@ -376,6 +484,11 @@ public class Controller {
 		return true;
 	}
 
+	/**
+	 * This checks if the ships is destroyed or not.
+	 * @param boat
+	 * @return
+	 */
 	public boolean wreckShip(Ship boat) {
 		if (!boat.isDestroy()) {
 			try {
@@ -398,6 +511,11 @@ public class Controller {
 		return false;
 	}
 
+	/**
+	 * This let's the ship move on hard mode.
+	 * @param boat
+	 * @return
+	 */
 	public boolean shipMove(Ship boat) {
 		ObservableList<Ship> allyBoats = theOne.getShips(boat.isPlayer());
 		int choice;
@@ -452,6 +570,10 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * This method starts a new game and destroy the old game.
+	 * @return
+	 */
 	public boolean startNewGame() {
 
 		ObservableList<Ship> ship = theOne.getShips();
@@ -488,6 +610,11 @@ public class Controller {
 
 	}
 
+	/**
+	 * This method retursn an ObservableList of all the ships that are still alive.
+	 * @param player
+	 * @return
+	 */
 	public ObservableList<Ship> getLivingShips(boolean player) {
 		ObservableList<Ship> living = FXCollections.observableArrayList();
 
