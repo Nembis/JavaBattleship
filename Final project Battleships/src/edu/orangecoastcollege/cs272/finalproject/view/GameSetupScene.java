@@ -55,16 +55,11 @@ public class GameSetupScene implements Initializable {
 		mPlayBtn.setDisable(mCounterOfShips != 0);
 		mPlaceBtn.setDisable(mCounterOfShips == 0);
 		mRemoveBtn.setDisable(mCounterOfShips == 10);
-<<<<<<< HEAD
 
-		mBoard = ViewNavigator.generateBoard(true);
-=======
-		
 		mBoard.getChildren().clear();
 		for(int x=0;x<10;x++)
 			for(int y=0;y<10;y++)
 				mBoard.add(ViewNavigator.generateSquare(true, x, y), x, y);
->>>>>>> branch 'master' of https://github.com/Nembis/JavaBattleship
 		return this;
 	}
 
@@ -83,16 +78,12 @@ public class GameSetupScene implements Initializable {
 		mPlayBtn.setDisable(mCounterOfShips != 0);
 		mPlaceBtn.setDisable(mCounterOfShips == 0);
 		mRemoveBtn.setDisable(mCounterOfShips == 10);
-<<<<<<< HEAD
 
-		mBoard = ViewNavigator.generateBoard(true);
-=======
-		
 		mBoard.getChildren().clear();
 		for(int x=0;x<10;x++)
 			for(int y=0;y<10;y++)
 				mBoard.add(ViewNavigator.generateSquare(true, x, y), x, y);
->>>>>>> branch 'master' of https://github.com/Nembis/JavaBattleship
+
 		return this;
 	}
 
@@ -107,10 +98,7 @@ public class GameSetupScene implements Initializable {
 
 		colCB.setItems(letters);
 		colCB.getSelectionModel().select(0);
-<<<<<<< HEAD
-		;
-=======
->>>>>>> branch 'master' of https://github.com/Nembis/JavaBattleship
+
 
 		ObservableList<Integer> numbers = FXCollections.observableArrayList();
 		for (int i = 1; i < 11; i++) {
@@ -121,31 +109,23 @@ public class GameSetupScene implements Initializable {
 		
 		mShips.setItems(controller.getShips(true));
 
-<<<<<<< HEAD
+
 		mNumOfShips.setText("10");
 
-=======
+
 		mNumOfShips.setText(String.valueOf(10 - controller.getShips(true).size()));
 		
->>>>>>> branch 'master' of https://github.com/Nembis/JavaBattleship
+
 		mPlayBtn.setDisable(true);
 		mRemoveBtn.setDisable(true);
-<<<<<<< HEAD
 
-		mBoard = ViewNavigator.generateBoard(true);
-=======
 		
 		for(int x=0;x<10;x++)
 			for(int y=0;y<10;y++)
 				mBoard.add(ViewNavigator.generateSquare(true, x, y), x, y);
->>>>>>> branch 'master' of https://github.com/Nembis/JavaBattleship
 	}
 
 	@FXML
-<<<<<<< HEAD
-	public Object loadMainGameScene() {
-
-=======
 	public Object loadMainGameScene(){
 		
 		Random rNG = new Random();
@@ -159,7 +139,6 @@ public class GameSetupScene implements Initializable {
 			controller.addShip(Character.toChars(Character.getNumericValue('A')+x)[0], y+1, false);
 		}
 		
->>>>>>> branch 'master' of https://github.com/Nembis/JavaBattleship
 		ViewNavigator.loadScene("Main Game Scene", ViewNavigator.MAIN_GAME_SCENE);
 
 		return this;
