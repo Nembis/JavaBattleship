@@ -65,8 +65,8 @@ public class Controller {
 				ArrayList<ArrayList<String>> records = theOne.mEasyMissilesDB.getAllRecords();
 				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
-					int row = Integer.parseInt(rs.get(1));
-					char col = rs.get(2).charAt(0);
+					int row = Integer.parseInt(rs.get(2));
+					char col = rs.get(1).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean lucky = rs.get(4).equals("1");
 					theOne.mAllMissileList.add(new Missile(id, col, row, player, 1, lucky));
@@ -77,8 +77,8 @@ public class Controller {
 				records = theOne.mNormMissilesDB.getAllRecords();
 				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
-					int row = Integer.parseInt(rs.get(1));
-					char col = rs.get(2).charAt(0);
+					int row = Integer.parseInt(rs.get(2));
+					char col = rs.get(1).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean lucky = rs.get(4).equals("1");
 					theOne.mAllMissileList.add(new Missile(id, col, row, player, 2, lucky));
@@ -89,8 +89,8 @@ public class Controller {
 				records = theOne.mHardMissilesDB.getAllRecords();
 				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
-					int row = Integer.parseInt(rs.get(1));
-					char col = rs.get(2).charAt(0);
+					int row = Integer.parseInt(rs.get(2));
+					char col = rs.get(1).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean lucky = rs.get(4).equals("1");
 					theOne.mAllMissileList.add(new Missile(id, col, row, player, 3, lucky));
@@ -100,8 +100,8 @@ public class Controller {
 				records = theOne.mEasyShipsDB.getAllRecords();
 				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
-					int row = Integer.parseInt(rs.get(1));
-					char col = rs.get(2).charAt(0);
+					int row = Integer.parseInt(rs.get(2));
+					char col = rs.get(1).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean down = rs.get(4).equals("1");
 					theOne.mAllShipList.add(new Ship(id, col, row, player, 1, down));
@@ -111,8 +111,8 @@ public class Controller {
 				records = theOne.mNormShipsDB.getAllRecords();
 				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
-					int row = Integer.parseInt(rs.get(1));
-					char col = rs.get(2).charAt(0);
+					int row = Integer.parseInt(rs.get(2));
+					char col = rs.get(1).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean down = rs.get(4).equals("1");
 					theOne.mAllShipList.add(new Ship(id, col, row, player, 2, down));
@@ -122,8 +122,8 @@ public class Controller {
 				records = theOne.mHardShipsDB.getAllRecords();
 				for (ArrayList<String> rs : records) {
 					int id = Integer.parseInt(rs.get(0));
-					int row = Integer.parseInt(rs.get(1));
-					char col = rs.get(2).charAt(0);
+					int row = Integer.parseInt(rs.get(2));
+					char col = rs.get(1).charAt(0);
 					boolean player = rs.get(3).equals("1");
 					boolean down = rs.get(4).equals("1");
 					theOne.mAllShipList.add(new Ship(id, col, row, player, 3, down));

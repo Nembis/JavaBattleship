@@ -1,12 +1,14 @@
 package edu.orangecoastcollege.cs272.finalproject.view;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import edu.orangecoastcollege.cs272.finalproject.controller.Controller;
 import edu.orangecoastcollege.cs272.finalproject.model.Ship;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -48,25 +50,29 @@ public class ViewNavigator {
 	public static GridPane generateBoard(boolean player)
 	{
 		GridPane board = new GridPane();
-		board.setPrefSize(32.0, 32.0);
-		board.setMinSize(32.0, 32.0);
-		board.setMaxSize(32.0, 32.0);
+		board.setPrefSize(320.0, 320.0);
+		board.setMinSize(320.0, 320.0);
+		board.setMaxSize(320.0, 320.0);
+		board.setGridLinesVisible(true);
 		ObservableList<Ship> ships = controller.getShips(player);
+		InputStream iStream = null;
 		for(int x=0;x<10;x++)
 		{
 			for(int y=0;y<10;y++)
 			{
 				for(Ship boat: ships)
 				{
-					if(boat.getNumRol()==y && Character.getNumericValue(boat.getAphaCol())-41==x)
+					if(boat.getNumRol()==y && Character.getNumericValue(boat.getAphaCol()-'A')==x)
 					{
 						if(boat.isDestroy())
-							board.add(new ImageView("GridPics/BurningSquare.png"), x, y);
+							iStream = ViewNavigator.class.getResourceAsStream("/resource/BurningSquare.jpg");
 						else if(player)
-							board.add(new ImageView("GridPics/ShipSquare.png"), x, y);
+							iStream = ViewNavigator.class.getResourceAsStream("/resource/ShipSquare.png");
 					}
 					else
-						board.add(new ImageView("GridPics/EmptySquare.png"), x, y);
+						iStream = ViewNavigator.class.getResourceAsStream("/resource/EmptySquare.png");
+					ImageView pic = new ImageView(new Image(iStream));
+					board.add(pic, x, y);
 				}
 			}
 		}

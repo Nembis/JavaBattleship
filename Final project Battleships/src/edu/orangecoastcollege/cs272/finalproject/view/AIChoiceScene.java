@@ -65,7 +65,8 @@ public class AIChoiceScene implements Initializable {
 		do{
 			rowChoice = rNGMissile.nextInt(10);
 			colChoice = rNGMissile.nextInt(10);
-		}while(rowChoice >=0 && rowChoice <10 && colChoice >=0 && colChoice <10);
+		}while(rowChoice >=0 && rowChoice <10 && colChoice >=0 && colChoice <10 &&
+				controller.isValideMissileLaunch((char)(colChoice+'A'), rowChoice+1, false));
 		}
 		else
 		{

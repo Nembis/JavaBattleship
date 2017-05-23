@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.GridPane;
 
 public class GameSetupScene implements Initializable {
 
@@ -29,7 +30,11 @@ public class GameSetupScene implements Initializable {
 	@FXML
 	private Button mPlayBtn;
 	@FXML
+	private Button mRemoveBtn;
+	@FXML
 	private ListView<Ship> mShips;
+	@FXML
+	private GridPane mBoard;
 
 	private int mCounterOfShips = 10;
 
@@ -37,19 +42,20 @@ public class GameSetupScene implements Initializable {
 	public Object PlaceShip() {
 
 		boolean place = controller.addShip(colCB.getSelectionModel().getSelectedItem(),
-				rowCB.getSelectionModel().getSelectedIndex(), true);
+				rowCB.getSelectionModel().getSelectedItem(), true);
 
 		if (place) {
 			mCounterOfShips--;
+			mNumOfShips.setText(String.valueOf(mCounterOfShips));
 			mShips.setAccessibleText(String.valueOf(mCounterOfShips));
 			mShips.setItems(controller.getShips(true));
 		}
+
+		mPlayBtn.setDisable(mCounterOfShips != 0);
+		mPlaceBtn.setDisable(mCounterOfShips == 0);
+		mRemoveBtn.setDisable(mCounterOfShips == 10);
 		
-		if(mCounterOfShips == 0)
-			mPlayBtn.setDisable(false);
-		else
-			mPlayBtn.setDisable(true);
-			
+		mBoard = ViewNavigator.generateBoard(true);
 		return this;
 	}
 
@@ -60,15 +66,16 @@ public class GameSetupScene implements Initializable {
 		
 		if(remove){
 			mCounterOfShips++;
+			mNumOfShips.setText(String.valueOf(mCounterOfShips));
 			mShips.setAccessibleText(String.valueOf(mCounterOfShips));
 			mShips.setItems(controller.getShips(true));
 		}
 		
-		if(mCounterOfShips == 0)
-			mPlayBtn.setDisable(false);
-		else
-			mPlayBtn.setDisable(true);
+		mPlayBtn.setDisable(mCounterOfShips != 0);
+		mPlaceBtn.setDisable(mCounterOfShips == 0);
+		mRemoveBtn.setDisable(mCounterOfShips == 10);
 		
+		mBoard = ViewNavigator.generateBoard(true);
 		return this;
 	}
 
@@ -82,18 +89,21 @@ public class GameSetupScene implements Initializable {
 			letters.add(lettersBase.charAt(c));
 
 		colCB.setItems(letters);
-		colCB.getSelectionModel().select('A');
+		colCB.getSelectionModel().select(0);;
 
 		ObservableList<Integer> numbers = FXCollections.observableArrayList();
 		for (int i = 1; i < 11; i++) {
 			numbers.add(i);
 		}
 		rowCB.setItems(numbers);
-		rowCB.getSelectionModel().select(1);
+		rowCB.getSelectionModel().select(0);
 
 		mNumOfShips.setText("10");
 		
 		mPlayBtn.setDisable(true);
+		mRemoveBtn.setDisable(true);
+		
+		mBoard = ViewNavigator.generateBoard(true);
 	}
 	
 	@FXML

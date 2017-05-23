@@ -22,16 +22,19 @@ public class DifficultyScene implements Initializable {
 	public Object difficultyClick() {
 		
 		try {
-			if (controller.checkIfGameAlreadyExists(difficultyCB.getSelectionModel().getSelectedIndex())) {
+			controller.setDifficulty(difficultyCB.getSelectionModel().getSelectedIndex());
+			if (controller.checkIfGameAlreadyExists(difficultyCB.getSelectionModel().getSelectedIndex()))
 				ViewNavigator.loadScene("Confirmation Scene", ViewNavigator.CONFIRMATION_SCENE);
-				return this;
-			}
+			else
+				ViewNavigator.loadScene("", ViewNavigator.DIFFICULTY_REVIEW_SCENE);
+			return this;
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		ViewNavigator.loadScene("", ViewNavigator.DIFFICULTY_REVIEW_SCENE);
+		
 
 		return this;
 	}
