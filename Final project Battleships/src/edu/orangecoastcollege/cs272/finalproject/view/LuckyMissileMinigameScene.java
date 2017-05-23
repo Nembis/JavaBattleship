@@ -65,10 +65,7 @@ public class LuckyMissileMinigameScene implements Initializable {
 	@FXML
 	public Object toNextScene()
 	{
-		if(choice == -1 || choice == correctChoice)
-			ViewNavigator.loadScene("Missile Launch", ViewNavigator.MAIN_GAME_SCENE);
-		else
-			ViewNavigator.loadScene("AI's Choice", ViewNavigator.AI_CHOICE_SCENE);
+		ViewNavigator.loadScene("Missile Launch", ViewNavigator.MAIN_GAME_SCENE);
 		return this;
 	}
 	

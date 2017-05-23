@@ -46,18 +46,14 @@ public class ViewNavigator {
 
 	public static ImageView generateSquare(boolean player, int col, int row) {
 		ObservableList<Ship> ships = controller.getShips(player);
-		Image image = new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\EmptySquare.png"));
 		for (Ship boat : ships) {
 			if (boat.getNumRol()-1 == row && Character.getNumericValue(boat.getAphaCol())-Character.getNumericValue('A') == col) {
 				if (boat.isDestroy())
-					image = new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\BurningSquare.png"));
+					return new ImageView(new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\BurningSquare.png")));
 				else if (boat.isPlayer() && player)
-					image = new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\ShipSquare.png"));
-				else
-					image = new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\EmptySquare.png"));
+					return new ImageView(new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\ShipSquare.png")));
 			}
 		}
-		return new ImageView(image);
-
+		return new ImageView(new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\EmptySquare.png")));
 	}
 }

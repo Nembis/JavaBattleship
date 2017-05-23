@@ -27,7 +27,7 @@
       </HBox>
       <VBox prefHeight="140.0" prefWidth="259.0" spacing="10.0">
          <children>
-            <Label text="One of these buttons allow you to get a lucky missile and two other forces you to skip your turn." textAlignment="CENTER" wrapText="true" />
+            <Label text="One of these buttons allow you to get a lucky missile." textAlignment="CENTER" wrapText="true" />
             <Label text="You can either click one of the numbers or continue on with no consequences." textAlignment="CENTER" wrapText="true" />
             <Label fx:id="choiceMessage" text="You found a Lucky Missile! Press the continue button." textAlignment="CENTER" textFill="RED" wrapText="true" />
          </children>
