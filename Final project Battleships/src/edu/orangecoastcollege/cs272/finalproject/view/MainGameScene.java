@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import edu.orangecoastcollege.cs272.finalproject.controller.Controller;
+import edu.orangecoastcollege.cs272.finalproject.model.Missile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 
 public class MainGameScene implements Initializable {
@@ -29,6 +31,8 @@ public class MainGameScene implements Initializable {
 	private GridPane aIBoard;
 	@FXML
 	private GridPane pRBoard;
+	@FXML
+	private ListView<Missile> missiles;
 
 	private int shipCount = controller.getLivingShips(true).size();
 	private int luckyCount = controller.getLuckyMissiles();
@@ -52,6 +56,8 @@ public class MainGameScene implements Initializable {
 		rowCB.setItems(numbers);
 		rowCB.getSelectionModel().select(0);
 
+		missiles.setItems(controller.getMissilesLaunched());
+		
 		numOfShips.setText(String.valueOf(shipCount));
 		useLuck.setText("Luck: "+String.valueOf(luckyCount));
 		useLuck.setDisable(luckyCount == 0);
@@ -74,7 +80,7 @@ public class MainGameScene implements Initializable {
 	@FXML
 	public Object launch() {
 
-		if (controller.addMissile(colCB.getSelectionModel().getSelectedItem(), rowCB.getSelectionModel().getSelectedItem(),
+		if (controller.addMissile(colCB.getSelectionModel().getSelectedItem().charValue(), rowCB.getSelectionModel().getSelectedItem().intValue(),
 				true, useLuck.isSelected()))
 			ViewNavigator.loadScene("Missle Launch Scene", ViewNavigator.MISSILE_LAUNCH_SCENE);
 

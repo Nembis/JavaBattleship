@@ -42,8 +42,8 @@ public class GameSetupScene implements Initializable {
 	@FXML
 	public Object placeShip() {
 
-		boolean place = controller.addShip(colCB.getSelectionModel().getSelectedItem(),
-				rowCB.getSelectionModel().getSelectedItem(), true);
+		boolean place = controller.addShip(colCB.getSelectionModel().getSelectedItem().charValue(),
+				rowCB.getSelectionModel().getSelectedItem().intValue(), true);
 
 		if (place) {
 			mCounterOfShips--;

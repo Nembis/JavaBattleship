@@ -75,6 +75,7 @@ public class MissileLaunchScene implements Initializable{
 		
 		if(luckyMissile)
 		{
+			aiActive = aIActiveShips();
 			Random rNG = new Random();
 			int extraMissiles = rNG.nextInt(3)+1;
 			int hit = 0;
@@ -83,7 +84,7 @@ public class MissileLaunchScene implements Initializable{
 				int[] location = selectInRange(lastMissile.getAphaCol()-'A', lastMissile.getNumRol()-1, 1, rNG);
 				for(Ship boat: aiActive)
 				{
-					if(boat.getAphaCol() == lastMissile.getAphaCol()+location[0] &&
+					if(boat.getAphaCol() == (char)(Character.getNumericValue(lastMissile.getAphaCol())+location[0]) &&
 							boat.getNumRol() == lastMissile.getNumRol()+location[1]);
 					{
 						controller.wreckShip(boat);

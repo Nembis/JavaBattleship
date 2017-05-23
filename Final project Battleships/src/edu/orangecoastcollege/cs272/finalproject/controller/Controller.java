@@ -180,7 +180,6 @@ public class Controller {
 		for (Ship boat : theOne.mAllShipList) {
 			if (boat.getDifficulty() == theOne.mDifficulty)
 				ship.add(boat);
-
 		}
 
 		return ship;

@@ -54,7 +54,7 @@
                   <ComboBox fx:id="colCB" prefWidth="150.0" />
                </children>
             </HBox>
-            <ListView fx:id="mShips" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ListView fx:id="missiles" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
                   <CheckBox fx:id="useLuck" mnemonicParsing="false" text="Lucky">
