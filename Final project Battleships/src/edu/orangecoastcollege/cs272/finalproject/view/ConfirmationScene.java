@@ -27,7 +27,12 @@ public class ConfirmationScene {
 	@FXML
 	public Object continueOldGame(){
 		
-		ViewNavigator.loadScene("Main Game Scene", ViewNavigator.MAIN_GAME_SCENE);
+		if(controller.getShips(false).size() < 10)
+			ViewNavigator.loadScene("Game Setup Scene", ViewNavigator.GAME_SETUP_SCENE);
+		else if(controller.getShips(true).size() > controller.getShips(false).size())
+			ViewNavigator.loadScene("AI's Turn", ViewNavigator.AI_CHOICE_SCENE);
+		else
+			ViewNavigator.loadScene("Main Game Scene", ViewNavigator.MAIN_GAME_SCENE);
 		
 		return this;
 	}

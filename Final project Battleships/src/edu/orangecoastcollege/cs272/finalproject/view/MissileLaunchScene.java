@@ -26,7 +26,10 @@ public class MissileLaunchScene implements Initializable{
 	@FXML
 	public Object continueGame()
 	{
-		ViewNavigator.loadScene("AI's Turn", ViewNavigator.AI_CHOICE_SCENE);
+		if(controller.getShips(false).size() == 0)
+			ViewNavigator.loadScene("You Won", ViewNavigator.GAME_OUTCOME_SCENE);
+		else
+			ViewNavigator.loadScene("AI's Turn", ViewNavigator.AI_CHOICE_SCENE);
 		return this;
 	}
 
@@ -99,6 +102,8 @@ public class MissileLaunchScene implements Initializable{
 			launchMessage.setText("The AI fired a missile at "+lastMissile.getAphaCol()+
 					lastMissile.getNumRol()+". It was a "+(targetHit?"hit":"miss")+".");
 		}
-		playerBoard = ViewNavigator.generateBoard(false);
+		for(int x=0;x<10;x++)
+			for(int y=0;y<10;y++)
+				playerBoard.add(ViewNavigator.generateSquare(true, x, y), x, y);
 	}
 }
