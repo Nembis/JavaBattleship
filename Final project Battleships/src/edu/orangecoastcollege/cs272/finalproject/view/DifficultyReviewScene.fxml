@@ -25,17 +25,16 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <Button mnemonicParsing="false" onAction="#loadSetupScene" prefHeight="31.0" prefWidth="65.0" text="Continue" />
+                  <Button mnemonicParsing="false" onAction="#loadSetupScene" prefHeight="31.0" prefWidth="65.0" text="Play" />
                   <Button mnemonicParsing="false" onAction="#loadDifficultyScene" prefHeight="31.0" prefWidth="65.0" text="Return" />
                </children>
                <opaqueInsets>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </opaqueInsets>
             </HBox>
-            <Label fx:id="luckyNote" alignment="CENTER" prefHeight="21.0" prefWidth="211.0" text="You start with  x lucky missile." GridPane.columnSpan="2" GridPane.halignment="CENTER" />
-            <Label fx:id="aILucky" alignment="CENTER" text="Your opponent is able to use lucky missiles" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Label fx:id="aIMoveShip" alignment="CENTER" prefHeight="21.0" prefWidth="311.0" text="Your opponent is able to move his own ships" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <Label text="Is this okay?" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label fx:id="luckyNote" alignment="CENTER" prefHeight="21.0" prefWidth="343.0" text="You start with  x lucky missile." GridPane.columnSpan="2" GridPane.halignment="CENTER" />
+            <Label fx:id="aILucky" alignment="CENTER" prefHeight="21.0" prefWidth="341.0" text="Your opponent is able to use lucky missiles" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Label fx:id="aIMoveShip" alignment="CENTER" prefHeight="21.0" prefWidth="325.0" text="Your opponent is able to move his own ships" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

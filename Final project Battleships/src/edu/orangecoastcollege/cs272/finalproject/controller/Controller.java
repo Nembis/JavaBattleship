@@ -272,12 +272,15 @@ public class Controller {
 							.createRecord(Arrays.copyOfRange(SHIP_FIELD_NAMES, 1, SHIP_FIELD_NAMES.length), shipData);
 				}
 				theOne.mAllShipList.add(new Ship(iD, col, row, player, theOne.mDifficulty, false));
+				
+				return true;
 			} catch (SQLException e) {
 				return false;
 			}
 		}
-
-		return true;
+		
+		return false;
+		
 	}
 
 	public boolean removeShip(Ship boat) {
