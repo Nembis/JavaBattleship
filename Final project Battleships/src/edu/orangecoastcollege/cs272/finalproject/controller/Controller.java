@@ -344,7 +344,7 @@ public class Controller {
 	}
 
 	public boolean addMissile(char col, int row, boolean player, boolean lucky) {
-		if(theOne.isValideMissileLaunch(col, row, player))
+		if(!theOne.isValideMissileLaunch(col, row, player))
 			return false;
 		
 		String colStr = String.valueOf(col);
@@ -380,6 +380,7 @@ public class Controller {
 				String boatID = String.valueOf(boat.getId());
 				String[] boatFields = { "down" };
 				String[] boatValue = { "1" };
+				boat.setIsDestroy(true);
 				switch (theOne.mDifficulty) {
 				case 0:
 					return theOne.mEasyShipsDB.updateRecord(boatID, boatFields, boatValue);

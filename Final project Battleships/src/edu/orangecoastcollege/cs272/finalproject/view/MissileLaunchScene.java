@@ -66,8 +66,7 @@ public class MissileLaunchScene implements Initializable{
 		for(Ship boat: aiActive)
 		{
 			if(boat.getAphaCol()==lastMissile.getAphaCol() && 
-					boat.getNumRol()==lastMissile.getNumRol() &&
-					!boat.isDestroy())
+					boat.getNumRol()==lastMissile.getNumRol())
 			{
 				targetHit = controller.wreckShip(shipSelect);
 				break;
@@ -92,14 +91,14 @@ public class MissileLaunchScene implements Initializable{
 						break;
 					}
 				}
-				launchMessage.setText("The AI fired a lucky missile at "+lastMissile.getAphaCol()+
+				launchMessage.setText("You fired a lucky missile at "+lastMissile.getAphaCol()+
 						lastMissile.getNumRol()+". "+String.valueOf(extraMissiles)+" more missiles launched with "+
 						String.valueOf(hit)+" of them as hits.");
 			}
 		}
 		else
 		{
-			launchMessage.setText("The AI fired a missile at "+lastMissile.getAphaCol()+
+			launchMessage.setText("You fired a missile at "+lastMissile.getAphaCol()+
 					lastMissile.getNumRol()+". It was a "+(targetHit?"hit":"miss")+".");
 		}
 		for(int x=0;x<10;x++)
