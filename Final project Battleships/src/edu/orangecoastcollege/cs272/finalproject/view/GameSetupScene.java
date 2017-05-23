@@ -55,7 +55,10 @@ public class GameSetupScene implements Initializable {
 		mPlaceBtn.setDisable(mCounterOfShips == 0);
 		mRemoveBtn.setDisable(mCounterOfShips == 10);
 		
-		mBoard = ViewNavigator.generateBoard(true);
+		mBoard.getChildren().clear();
+		for(int x=0;x<10;x++)
+			for(int y=0;y<10;y++)
+				mBoard.add(ViewNavigator.generateSquare(true, x, y), x, y);
 		return this;
 	}
 
@@ -75,7 +78,10 @@ public class GameSetupScene implements Initializable {
 		mPlaceBtn.setDisable(mCounterOfShips == 0);
 		mRemoveBtn.setDisable(mCounterOfShips == 10);
 		
-		mBoard = ViewNavigator.generateBoard(true);
+		mBoard.getChildren().clear();
+		for(int x=0;x<10;x++)
+			for(int y=0;y<10;y++)
+				mBoard.add(ViewNavigator.generateSquare(true, x, y), x, y);
 		return this;
 	}
 
@@ -103,7 +109,9 @@ public class GameSetupScene implements Initializable {
 		mPlayBtn.setDisable(true);
 		mRemoveBtn.setDisable(true);
 		
-		mBoard = ViewNavigator.generateBoard(true);
+		for(int x=0;x<10;x++)
+			for(int y=0;y<10;y++)
+				mBoard.add(ViewNavigator.generateSquare(true, x, y), x, y);
 	}
 	
 	@FXML

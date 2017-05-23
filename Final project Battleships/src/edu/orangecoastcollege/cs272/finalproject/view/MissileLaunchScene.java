@@ -99,6 +99,8 @@ public class MissileLaunchScene implements Initializable{
 			launchMessage.setText("The AI fired a missile at "+lastMissile.getAphaCol()+
 					lastMissile.getNumRol()+". It was a "+(targetHit?"hit":"miss")+".");
 		}
-		playerBoard = ViewNavigator.generateBoard(false);
+		for(int x=0;x<10;x++)
+			for(int y=0;y<10;y++)
+				playerBoard.add(ViewNavigator.generateSquare(true, x, y), x, y);
 	}
 }

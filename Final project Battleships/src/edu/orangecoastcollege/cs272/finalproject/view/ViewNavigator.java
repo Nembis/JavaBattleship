@@ -1,8 +1,7 @@
 package edu.orangecoastcollege.cs272.finalproject.view;
 
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-
 import edu.orangecoastcollege.cs272.finalproject.controller.Controller;
 import edu.orangecoastcollege.cs272.finalproject.model.Ship;
 import javafx.collections.ObservableList;
@@ -10,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class ViewNavigator {
@@ -33,7 +31,7 @@ public class ViewNavigator {
 	public static void setStage(Stage stage) {
 		mainStage = stage;
 	}
-	
+
 	public static void loadScene(String title, String sceneFXML) {
 
 		try {
@@ -47,35 +45,18 @@ public class ViewNavigator {
 		}
 	}
 
-	public static GridPane generateBoard(boolean player)
-	{
-		GridPane board = new GridPane();
-		board.setPrefSize(320.0, 320.0);
-		board.setMinSize(320.0, 320.0);
-		board.setMaxSize(320.0, 320.0);
-		board.setGridLinesVisible(true);
+	public static ImageView generateSquare(boolean player, int col, int row) {
 		ObservableList<Ship> ships = controller.getShips(player);
-		InputStream iStream = null;
-		for(int x=0;x<10;x++)
-		{
-			for(int y=0;y<10;y++)
-			{
-				for(Ship boat: ships)
-				{
-					if(boat.getNumRol()==y && Character.getNumericValue(boat.getAphaCol()-'A')==x)
-					{
-						if(boat.isDestroy())
-							iStream = ViewNavigator.class.getResourceAsStream("/resource/BurningSquare.jpg");
-						else if(player)
-							iStream = ViewNavigator.class.getResourceAsStream("/resource/ShipSquare.png");
-					}
-					else
-						iStream = ViewNavigator.class.getResourceAsStream("/resource/EmptySquare.png");
-					ImageView pic = new ImageView(new Image(iStream));
-					board.add(pic, x, y);
-				}
+		Image image = new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\EmptySquare.png"));
+		for (Ship boat : ships) {
+			if (boat.getNumRol()-1 == row && Character.getNumericValue(boat.getAphaCol())-Character.getNumericValue('A') == col) {
+				if (boat.isDestroy())
+					image = new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\BurningSquare.png"));
+				else if (player)
+					image = new Image(ViewNavigator.class.getResourceAsStream("..\\..\\..\\..\\..\\image\\ShipSquare.png"));
 			}
 		}
-		return board;
+		return new ImageView(image);
+
 	}
 }

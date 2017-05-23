@@ -144,7 +144,9 @@ public class AIChoiceScene implements Initializable {
 			moveError = movingShip();
 		if(!moveShip || moveError)
 			missileFire();
-		playerBoard = ViewNavigator.generateBoard(true);
+		for(int x=0;x<10;x++)
+			for(int y=0;y<10;y++)
+				playerBoard.add(ViewNavigator.generateSquare(true, x, y), x, y);
 	}
 
 }
